@@ -36,8 +36,8 @@ body{font-family:'Rajdhani',sans-serif;background:#0d0f12;color:#e8e0cc;min-heig
 .hero-line{position:absolute;background:#c9a84c;opacity:0.04}
 .hero-line.h{height:1px;width:100%}
 .hero-line.v{width:1px;height:100%}
-.hero-content{display:flex;flex-direction:column;align-items:center;gap:24px;z-index:1;max-width:700px;text-align:center}
-.hero-emblem{width:220px;height:220px;object-fit:contain;filter:drop-shadow(0 0 30px rgba(201,168,76,0.15))}
+.hero-content{display:flex;flex-direction:column;align-items:center;gap:24px;z-index:1;max-width:900px;text-align:center}
+.hero-gif{width:420px;height:420px;object-fit:contain}
 .hero-tag{font-size:11px;letter-spacing:6px;text-transform:uppercase;color:#5a5248;margin-bottom:-16px}
 .hero-title{font-family:'Bebas Neue',sans-serif;font-size:72px;letter-spacing:12px;color:#c9a84c;line-height:1;text-transform:uppercase}
 .hero-title span{color:#e8e0cc}
@@ -96,7 +96,7 @@ select.ctrl option{background:#14171c}
 .row-img img{width:100%;height:100%;object-fit:contain}
 .img-ph{color:#252320;font-size:11px;font-family:'Share Tech Mono',monospace;letter-spacing:1px;text-align:center}
 .row-name{font-size:18px;font-weight:700;color:#e8e0cc;padding:0 16px;letter-spacing:0.3px}
-.row-vendor{font-size:17px;letter-spacing:2px;text-transform:uppercase;color:#c9a84c77}
+.row-vendor{font-size:22px;letter-spacing:2px;text-transform:uppercase;color:#c9a84c77}
 .row-vendor.all-v{display:inline-block;color:#e8d89a;background:#c9a84c15;border:1px solid #c9a84c33;padding:4px 12px;font-size:14px;letter-spacing:2px}
 .row-price{font-family:'Share Tech Mono',monospace;font-size:22px;color:#c9a84c;text-align:right;padding-right:16px}
 .row-num{font-family:'Share Tech Mono',monospace;font-size:13px;color:#2a2820;text-align:right;padding-right:6px}
@@ -172,10 +172,7 @@ select.ctrl option{background:#14171c}
     </div>
     <div class="hero-content">
       <span class="hero-tag">Forces Spéciales</span>
-      <div style="display:flex;align-items:center;justify-content:center;gap:32px;flex-wrap:wrap">
-        <img id="heroEmblem" src="" alt="FoS Emblem" class="hero-emblem"/>
-        <img src="v3_fini.gif" alt="FoS Animation" class="hero-emblem" style="border-radius:4px"/>
-      </div>
+      <img src="v3_fini.gif" alt="FoS Animation" class="hero-gif"/>
       <div class="hero-title">F<span>o</span>S</div>
       <div class="hero-subtitle">Les Forces Spéciales — Gray Zone Warfare</div>
       <div class="hero-divider"></div>
@@ -184,7 +181,6 @@ select.ctrl option{background:#14171c}
         <button class="hero-btn hero-btn-primary" onclick="goPage('ventes')">Accéder aux ventes</button>
         <button class="hero-btn hero-btn-secondary" onclick="goPage('carte')">Voir la carte</button>
       </div>
-      <div style="margin-top:16px;font-size:11px;letter-spacing:2px;color:#3a3830;text-transform:uppercase">Site créé par <span style="color:#c9a84c88">REAPERS</span> · FoS — Forces Spéciales · Gray Zone Warfare</div>
     </div>
   </div>
 </div>
