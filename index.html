@@ -83,16 +83,16 @@ select.ctrl option{background:#14171c}
 .sum-l{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#5a5248}
 .sum-v{font-family:'Share Tech Mono',monospace;font-size:14px;color:#c9a84c;margin-top:1px}
 
-.list-header{display:grid;grid-template-columns:60px 1fr 150px 120px 50px 80px;align-items:center;padding:7px 16px;background:#080a0d;border-bottom:1px solid #c9a84c1a}
+.list-header{display:grid;grid-template-columns:90px 1fr 200px 160px 70px;align-items:center;padding:8px 16px;background:#080a0d;border-bottom:1px solid #c9a84c1a}
 .list-header span{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#3a3830;font-weight:700}
 .list-header span.r{text-align:right}
 
 .list{display:flex;flex-direction:column;gap:1px;background:#131619}
-.row{display:grid;grid-template-columns:60px 1fr 150px 120px 50px 80px;align-items:center;padding:0 16px;background:#14171c;min-height:58px;transition:background 0.1s;animation:rowIn 0.15s ease}
+.row{display:grid;grid-template-columns:90px 1fr 200px 160px 70px;align-items:center;padding:0;background:#14171c;min-height:90px;transition:background 0.1s;animation:rowIn 0.15s ease}
 @keyframes rowIn{from{opacity:0;transform:translateX(-4px)}to{opacity:1;transform:translateX(0)}}
 .row:hover{background:#1a1d23}
 .row.universal{border-left:3px solid #c9a84c55}
-.row-img{width:48px;height:48px;background:#0d0f11;display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0}
+.row-img{width:90px;height:90px;background:#0d0f11;display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0}
 .row-img img{width:100%;height:100%;object-fit:contain}
 .img-ph{color:#252320;font-size:9px;font-family:'Share Tech Mono',monospace;letter-spacing:1px;text-align:center}
 .row-name{font-size:15px;font-weight:700;color:#e8e0cc;padding:0 10px;letter-spacing:0.3px}
@@ -207,11 +207,10 @@ select.ctrl option{background:#14171c}
     <div class="sum-item"><div class="sum-l">Dernière sauvegarde</div><div class="sum-v" id="sumVersion" style="font-size:11px;color:#5a5248">—</div></div>
   </div>
   <div class="list-header">
-    <span></span>
-    <span style="padding-left:10px">Objet</span>
+    <span>Image</span>
+    <span style="padding-left:16px">Nom de l'objet</span>
     <span>Vendeur</span>
     <span class="r">Prix de vente</span>
-    <span class="r">#</span>
     <span></span>
   </div>
   <div class="list" id="list"></div>
@@ -312,7 +311,7 @@ function renderList(){
   const vf=document.getElementById('vendorFilter').value;
   let filtered=items.filter(it=>{
     const mq=!q||it.nom.toLowerCase().includes(q)||it.vendeur.toLowerCase().includes(q);
-    const mv=!vf||(vf==='TOUS'?it.vendeur==='TOUS':it.vendeur===vf||it.vendeur==='TOUS');
+    const mv=!vf||(vf==='TOUS'?it.vendeur==='TOUS':it.vendeur===vf);
     return mq&&mv;
   });
   filtered.sort((a,b)=>sortDir*((parseFloat(a.prix)||0)-(parseFloat(b.prix)||0)));
@@ -324,11 +323,10 @@ function renderList(){
     list.innerHTML=filtered.map((it,i)=>`
       <div class="row${it.vendeur==='TOUS'?' universal':''}">
         <div class="row-img">${it.img?`<img src="${it.img}"/>`:`<span class="img-ph">IMG</span>`}</div>
-        <div class="row-name">${it.nom}</div>
-        <div>${it.vendeur==='TOUS'?`<span class="row-vendor all-v">Tous les vendeurs</span>`:`<span class="row-vendor">${it.vendeur}</span>`}</div>
-        <div class="row-price">${it.prix?(parseFloat(it.prix)).toLocaleString('fr-FR')+' $':'—'}</div>
-        <div class="row-num">${String(i+1).padStart(2,'0')}</div>
-        <div><button class="del-btn" onclick="delItem('${it.id}')">✕ Suppr.</button></div>
+        <div class="row-name" style="padding:0 16px;font-size:17px">${it.nom}</div>
+        <div style="padding:0 12px">${it.vendeur==='TOUS'?`<span class="row-vendor all-v">Tous les vendeurs</span>`:`<span class="row-vendor">${it.vendeur}</span>`}</div>
+        <div class="row-price" style="font-size:16px">${it.prix?(parseFloat(it.prix)).toLocaleString('fr-FR')+' $':'—'}</div>
+        <div style="text-align:center"><button class="del-btn" onclick="delItem('${it.id}')">✕</button></div>
       </div>`).join('');
   }
   document.getElementById('sumCount').textContent=items.length;
