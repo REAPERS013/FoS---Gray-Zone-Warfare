@@ -108,7 +108,95 @@ select.ctrl option{background:#14171c}
 
 .empty-state{padding:70px 24px;text-align:center;color:#2a2820;font-size:13px;letter-spacing:3px;text-transform:uppercase;line-height:2.5}
 
-/* ── CARTE PAGE ── */
+/* ── QUÊTES PAGE ── */
+.quetes-controls{display:flex;align-items:center;gap:8px;padding:10px 16px;background:#14171c;border-bottom:1px solid #c9a84c22;flex-wrap:wrap}
+.type-badge{padding:4px 12px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;border:1px solid;cursor:pointer;transition:all 0.15s;font-family:'Rajdhani',sans-serif}
+.type-principale{border-color:#c9a84c55;color:#c9a84c77}
+.type-principale.on{background:#c9a84c;color:#0a0c0e;border-color:#c9a84c}
+.type-secondaire{border-color:#5a8a5a55;color:#5a8a5a}
+.type-secondaire.on{background:#5a8a5a;color:#fff;border-color:#5a8a5a}
+.type-contrat{border-color:#5a6a8a55;color:#5a6a8a}
+.type-contrat.on{background:#5a6a8a;color:#fff;border-color:#5a6a8a}
+
+.quetes-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1px;background:#131619;padding:1px}
+.quete-card{background:#14171c;padding:20px;cursor:pointer;transition:background 0.12s;border-left:3px solid transparent}
+.quete-card:hover{background:#1a1d23}
+.quete-card.principale{border-left-color:#c9a84c}
+.quete-card.secondaire{border-left-color:#5a8a5a}
+.quete-card.contrat{border-left-color:#5a6a8a}
+.quete-card-header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px}
+.quete-card-title{font-size:16px;font-weight:700;color:#e8e0cc;letter-spacing:0.5px}
+.quete-type-pill{font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:3px 8px;border:1px solid;white-space:nowrap;flex-shrink:0}
+.pill-principale{color:#c9a84c;border-color:#c9a84c44}
+.pill-secondaire{color:#5a8a5a;border-color:#5a8a5a44}
+.pill-contrat{color:#7a8aaa;border-color:#5a6a8a44}
+.quete-card-vendor{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#c9a84c55;margin-bottom:8px}
+.quete-card-desc{font-size:13px;color:#5a5248;line-height:1.6;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.quete-card-footer{display:flex;align-items:center;justify-content:space-between;margin-top:12px;padding-top:10px;border-top:1px solid #1e2228}
+.quete-card-reward{font-family:'Share Tech Mono',monospace;font-size:12px;color:#c9a84c88}
+.quete-card-imgs{font-size:10px;color:#3a3830;letter-spacing:1px}
+.quete-card-actions{display:flex;gap:6px}
+.quete-act-btn{background:transparent;border:none;font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;padding:3px 6px;transition:color 0.1s}
+
+.quete-detail-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:300;overflow-y:auto}
+.quete-detail-bg.open{display:block}
+.quete-detail{max-width:800px;margin:40px auto;background:#14171c;border:1px solid #c9a84c33;border-top:3px solid #c9a84c;padding:32px;position:relative}
+.quete-detail-close{position:absolute;top:16px;right:16px;background:transparent;border:none;color:#7a7060;font-size:20px;cursor:pointer;transition:color 0.1s}
+.quete-detail-close:hover{color:#c9a84c}
+.quete-detail-type{font-size:10px;letter-spacing:3px;text-transform:uppercase;margin-bottom:8px}
+.quete-detail-title{font-size:26px;font-weight:700;color:#c9a84c;letter-spacing:2px;margin-bottom:4px}
+.quete-detail-vendor{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#5a5248;margin-bottom:20px}
+.quete-section{margin-bottom:20px}
+.quete-section-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#5a5248;margin-bottom:8px;border-bottom:1px solid #1e2228;padding-bottom:6px}
+.quete-section-content{font-size:15px;color:#d4caba;line-height:1.7}
+.quete-reward-val{font-family:'Share Tech Mono',monospace;font-size:16px;color:#c9a84c}
+.quete-imgs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.quete-img-item{background:#0d0f11;border:1px solid #1e2228}
+.quete-img-item img{width:100%;height:150px;object-fit:cover;display:block;cursor:pointer}
+.quete-img-item img:hover{opacity:0.85}
+.quete-img-coords{font-family:'Share Tech Mono',monospace;font-size:11px;color:#c9a84c77;padding:6px 8px;text-align:center}
+.quete-img-desc{font-size:12px;color:#5a5248;padding:4px 8px 8px;line-height:1.5;border-top:1px solid #1e2228}
+
+.quete-step{background:#0f1216;border:1px solid #1e2228;border-left:3px solid #c9a84c33;margin-bottom:20px;overflow:hidden}
+.quete-step-header{padding:12px 16px;background:#0a0c0e;display:flex;align-items:center;gap:10px}
+.quete-step-num{font-family:'Share Tech Mono',monospace;font-size:11px;color:#c9a84c;background:#c9a84c1a;padding:3px 8px;border:1px solid #c9a84c33}
+.quete-step-title{font-size:15px;font-weight:700;color:#e8e0cc;letter-spacing:0.5px}
+.quete-step-desc{padding:12px 16px;font-size:14px;color:#7a7060;line-height:1.7;border-bottom:1px solid #1e2228}
+.quete-step-imgs{padding:12px;display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+
+.step-slot{background:#0a0c0e;border:1px solid #1e2228;padding:10px;margin-bottom:10px}
+.step-slot-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.step-slot-num{font-family:'Share Tech Mono',monospace;font-size:10px;color:#c9a84c;letter-spacing:2px}
+.step-slot-del{background:transparent;border:none;color:#3a3030;cursor:pointer;font-size:13px;transition:color 0.1s}
+.step-slot-del:hover{color:#c94c4c}
+.step-slot input,.step-slot textarea{width:100%;background:#0f1216;border:1px solid #c9a84c22;color:#e8e0cc;padding:6px 10px;font-family:'Rajdhani',sans-serif;font-size:13px;outline:none;margin-bottom:6px;resize:vertical}
+.step-slot input:focus,.step-slot textarea:focus{border-color:#c9a84c}
+.step-imgs-list{display:flex;flex-direction:column;gap:6px;margin-top:6px}
+.step-img-row{display:flex;align-items:center;gap:8px;background:#14171c;padding:6px}
+.step-img-row img{width:48px;height:48px;object-fit:cover;flex-shrink:0}
+.step-img-row-info{flex:1;display:flex;flex-direction:column;gap:4px}
+.step-img-row-info input{background:#0a0c0e;border:1px solid #c9a84c22;color:#e8e0cc;padding:4px 8px;font-family:'Rajdhani',sans-serif;font-size:12px;outline:none;width:100%}
+.step-img-row-del{background:transparent;border:none;color:#3a3030;cursor:pointer;font-size:13px;transition:color 0.1s;flex-shrink:0}
+.step-img-row-del:hover{color:#c94c4c}
+.add-step-img-btn{background:transparent;border:1px dashed #c9a84c22;color:#5a5248;padding:5px;font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;width:100%;transition:all 0.15s;margin-top:4px}
+.add-step-img-btn:hover{border-color:#c9a84c44;color:#c9a84c77}
+
+.img-lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:500;align-items:center;justify-content:center;cursor:zoom-out}
+.img-lightbox.open{display:flex}
+.img-lightbox img{max-width:90vw;max-height:90vh;object-fit:contain}
+
+.qmodal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:400;align-items:flex-start;justify-content:center;padding:30px 16px;overflow-y:auto}
+.qmodal-bg.open{display:flex}
+.qmodal{background:#14171c;border:1px solid #c9a84c44;border-top:3px solid #c9a84c;padding:26px;width:100%;max-width:560px;margin-bottom:40px}
+.img-slot{background:#0f1216;border:1px dashed #c9a84c33;padding:10px;margin-bottom:8px;display:flex;align-items:center;gap:10px}
+.img-slot img{width:60px;height:60px;object-fit:cover;flex-shrink:0}
+.img-slot-info{flex:1;display:flex;flex-direction:column;gap:4px}
+.img-slot input{background:#0a0c0e;border:1px solid #c9a84c22;color:#e8e0cc;padding:4px 8px;font-family:'Rajdhani',sans-serif;font-size:13px;outline:none;width:100%}
+.img-slot input:focus{border-color:#c9a84c}
+.img-slot-del{background:transparent;border:none;color:#3a3030;cursor:pointer;font-size:14px;transition:color 0.1s}
+.img-slot-del:hover{color:#c94c4c}
+.field textarea{width:100%;background:#0f1216;border:1px solid #c9a84c33;color:#e8e0cc;padding:8px 12px;font-family:'Rajdhani',sans-serif;font-size:14px;outline:none;resize:vertical;min-height:80px}
+.field textarea:focus{border-color:#c9a84c}
 .map-page{min-height:calc(100vh - 52px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;padding:40px 20px;background:#0a0c0e}
 .map-placeholder{border:1px dashed #c9a84c22;padding:60px 40px;text-align:center;color:#2a2820;font-size:11px;letter-spacing:3px;text-transform:uppercase;line-height:2.5;max-width:500px}
 .map-icon{font-size:32px;margin-bottom:16px;opacity:0.3}
@@ -156,6 +244,7 @@ select.ctrl option{background:#14171c}
   <div class="nav-links">
     <div class="nav-link active" id="nav-accueil" onclick="goPage('accueil')">Accueil</div>
     <div class="nav-link" id="nav-ventes" onclick="goPage('ventes')">Ventes</div>
+    <div class="nav-link" id="nav-quetes" onclick="goPage('quetes')">Quêtes</div>
     <div class="nav-link disabled" id="nav-carte" onclick="goPage('carte')">Carte <span style="font-size:9px;margin-left:4px;opacity:0.4">bientôt</span></div>
   </div>
 </nav>
@@ -224,7 +313,88 @@ select.ctrl option{background:#14171c}
   </div>
 </div>
 
-<!-- PAGE CARTE -->
+<!-- PAGE QUÊTES -->
+<div class="page" id="page-quetes">
+  <div class="quetes-controls">
+    <div class="search-wrap" style="flex:1;min-width:180px;position:relative">
+      <span class="s-ico">&#9906;</span>
+      <input type="text" id="qsearch" placeholder="Rechercher une quête..." oninput="renderQuetes()" style="width:100%;background:#0f1216;border:1px solid #c9a84c33;color:#e8e0cc;padding:7px 12px 7px 34px;font-family:'Rajdhani',sans-serif;font-size:14px;outline:none"/>
+    </div>
+    <select class="ctrl" id="qvendorFilter" onchange="renderQuetes()">
+      <option value="">Tous les vendeurs</option>
+    </select>
+    <button class="type-badge type-principale on" id="f-principale" onclick="toggleQFilter('principale')">Tâche Principale</button>
+    <button class="type-badge type-secondaire on" id="f-secondaire" onclick="toggleQFilter('secondaire')">Tâche Secondaire</button>
+    <button class="type-badge type-contrat on" id="f-contrat" onclick="toggleQFilter('contrat')">Contrat</button>
+    <button class="btn btn-gold" onclick="openQModal()">+ Ajouter une quête</button>
+  </div>
+  <div class="summary-bar">
+    <div class="sum-item"><div class="sum-l">Quêtes répertoriées</div><div class="sum-v" id="qCount">0</div></div>
+    <div class="sum-item"><div class="sum-l">Tâches Principales</div><div class="sum-v" id="qPrincipale" style="color:#c9a84c">0</div></div>
+    <div class="sum-item"><div class="sum-l">Tâches Secondaires</div><div class="sum-v" id="qSecondaire" style="color:#5a8a5a">0</div></div>
+    <div class="sum-item"><div class="sum-l">Contrats</div><div class="sum-v" id="qContrat" style="color:#7a8aaa">0</div></div>
+  </div>
+  <div class="quetes-grid" id="quetes-grid"></div>
+  <div class="empty-state" id="quetes-empty">Aucune quête répertoriée<br><span style="color:#c9a84c;cursor:pointer" onclick="openQModal()">+ Ajouter une quête</span></div>
+</div>
+
+<!-- DETAIL QUÊTE -->
+<div class="quete-detail-bg" id="queteDetailBg" onclick="closeQDetail(event)">
+  <div class="quete-detail" id="queteDetail"></div>
+</div>
+
+<!-- MODAL QUÊTE -->
+<div class="qmodal-bg" id="qmodalBg">
+  <div class="qmodal" style="max-width:640px">
+    <div class="modal-title" id="qmodal-title">Ajouter une quête</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div class="field">
+        <label>Nom de la quête *</label>
+        <input type="text" id="qNom" placeholder="Ex: Feu et Eau"/>
+      </div>
+      <div class="field">
+        <label>Type</label>
+        <select id="qType">
+          <option value="principale">Tâche Principale</option>
+          <option value="secondaire">Tâche Secondaire</option>
+          <option value="contrat">Contrat</option>
+        </select>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div class="field">
+        <label>Vendeur lié</label>
+        <select id="qVendeur"></select>
+      </div>
+      <div class="field">
+        <label>Récompense</label>
+        <input type="text" id="qReward" placeholder="Ex: 5 000 $ + Réputation"/>
+      </div>
+    </div>
+    <div class="field">
+      <label>Description générale de la quête</label>
+      <textarea id="qDesc" placeholder="Résumé de la quête..."></textarea>
+    </div>
+    <div class="field">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+        <label style="margin-bottom:0">Étapes</label>
+        <button class="btn btn-ghost" style="font-size:11px;padding:4px 12px" onclick="addStep()">+ Ajouter une étape</button>
+      </div>
+      <div id="qStepSlots"></div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-muted" style="flex:1" onclick="closeQModal()">Annuler</button>
+      <button class="btn btn-gold" style="flex:2" onclick="saveQuete()">Enregistrer</button>
+    </div>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="img-lightbox" id="lightbox" onclick="document.getElementById('lightbox').classList.remove('open')">
+  <img id="lightboxImg" src="" alt=""/>
+</div>
+
+<!-- CARTE PAGE -->
 <div class="page" id="page-carte">
   <div class="map-page">
     <div class="map-placeholder">
@@ -302,6 +472,7 @@ function init(){
   msel.innerHTML+=`<option value="TOUS">Tous — prix identique partout</option>`;
 
   autoLoad();
+  initQuetes();
 }
 
 async function autoLoad(){
@@ -455,6 +626,212 @@ function toast(msg){
   const t=document.createElement('div');t.className='toast';t.textContent=msg;
   document.body.appendChild(t);setTimeout(()=>t.remove(),2500);
 }
+
+// ── QUÊTES ──
+let quetes=[];
+let pendingQEdit=null;
+let qSteps=[];
+const qFilters={principale:true,secondaire:true,contrat:true};
+
+function initQuetes(){
+  const qvf=document.getElementById('qvendorFilter');
+  qvf.innerHTML=`<option value="">Tous les vendeurs</option>`;
+  vendors.forEach(v=>{qvf.innerHTML+=`<option value="${v}">${v}</option>`;});
+  const qvsel=document.getElementById('qVendeur');
+  qvsel.innerHTML='';
+  vendors.forEach(v=>{qvsel.innerHTML+=`<option value="${v}">${v}</option>`;});
+  renderQuetes();
+}
+
+function toggleQFilter(type){
+  qFilters[type]=!qFilters[type];
+  const btn=document.getElementById('f-'+type);
+  btn.classList.toggle('on',qFilters[type]);
+  renderQuetes();
+}
+
+function typeLabel(t){return t==='principale'?'Tâche Principale':t==='secondaire'?'Tâche Secondaire':'Contrat';}
+function typePillClass(t){return t==='principale'?'pill-principale':t==='secondaire'?'pill-secondaire':'pill-contrat';}
+
+function renderQuetes(){
+  const q=document.getElementById('qsearch').value.toLowerCase();
+  const vf=document.getElementById('qvendorFilter').value;
+  let filtered=quetes.filter(qt=>{
+    if(!qFilters[qt.type])return false;
+    if(vf&&qt.vendeur!==vf)return false;
+    if(q&&!qt.nom.toLowerCase().includes(q)&&!qt.desc.toLowerCase().includes(q))return false;
+    return true;
+  });
+  const grid=document.getElementById('quetes-grid');
+  const empty=document.getElementById('quetes-empty');
+  document.getElementById('qCount').textContent=quetes.length;
+  document.getElementById('qPrincipale').textContent=quetes.filter(q=>q.type==='principale').length;
+  document.getElementById('qSecondaire').textContent=quetes.filter(q=>q.type==='secondaire').length;
+  document.getElementById('qContrat').textContent=quetes.filter(q=>q.type==='contrat').length;
+  if(filtered.length===0){grid.innerHTML='';empty.style.display='block';return;}
+  empty.style.display='none';
+  const totalImgs=qt=>(qt.etapes||[]).reduce((a,e)=>a+(e.imgs||[]).length,0);
+  grid.innerHTML=filtered.map(qt=>`
+    <div class="quete-card ${qt.type}" onclick="openQDetail('${qt.id}')">
+      <div class="quete-card-header">
+        <div class="quete-card-title">${qt.nom}</div>
+        <span class="quete-type-pill ${typePillClass(qt.type)}">${typeLabel(qt.type)}</span>
+      </div>
+      <div class="quete-card-vendor">${qt.vendeur}</div>
+      <div class="quete-card-desc">${qt.desc||'—'}</div>
+      <div class="quete-card-footer">
+        <span class="quete-card-reward">${qt.reward?'🎁 '+qt.reward:''}</span>
+        <span class="quete-card-imgs">${(qt.etapes||[]).length} étape${(qt.etapes||[]).length>1?'s':''} · ${totalImgs(qt)} img</span>
+        <div class="quete-card-actions" onclick="event.stopPropagation()">
+          <button class="quete-act-btn" style="color:#c9a84c77" onclick="openQModal('${qt.id}')">✏ Modifier</button>
+          <button class="quete-act-btn" style="color:#3a3030" onmouseenter="this.style.color='#c94c4c'" onmouseleave="this.style.color='#3a3030'" onclick="delQuete('${qt.id}')">✕ Suppr.</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function openQDetail(id){
+  const qt=quetes.find(q=>q.id===id);if(!qt)return;
+  const etapes=qt.etapes||[];
+  document.getElementById('queteDetail').innerHTML=`
+    <button class="quete-detail-close" onclick="document.getElementById('queteDetailBg').classList.remove('open')">✕</button>
+    <div class="quete-detail-type ${typePillClass(qt.type)}">${typeLabel(qt.type)}</div>
+    <div class="quete-detail-title">${qt.nom}</div>
+    <div class="quete-detail-vendor">${qt.vendeur}</div>
+    ${qt.desc?`<div class="quete-section"><div class="quete-section-label">Description</div><div class="quete-section-content">${qt.desc.replace(/\n/g,'<br>')}</div></div>`:''}
+    ${qt.reward?`<div class="quete-section"><div class="quete-section-label">Récompense</div><div class="quete-reward-val">${qt.reward}</div></div>`:''}
+    ${etapes.length?`<div class="quete-section"><div class="quete-section-label">Étapes (${etapes.length})</div>
+      ${etapes.map((e,i)=>`
+        <div class="quete-step">
+          <div class="quete-step-header">
+            <span class="quete-step-num">ÉTAPE ${i+1}</span>
+            <span class="quete-step-title">${e.titre||'Sans titre'}</span>
+          </div>
+          ${e.desc?`<div class="quete-step-desc">${e.desc.replace(/\n/g,'<br>')}</div>`:''}
+          ${(e.imgs||[]).length?`<div class="quete-step-imgs">
+            ${e.imgs.map(im=>`
+              <div class="quete-img-item">
+                <img src="${im.src}" alt="" onclick="openLightbox('${im.src}')" style="cursor:zoom-in"/>
+                ${im.coords?`<div class="quete-img-coords">${im.coords}</div>`:''}
+                ${im.desc?`<div class="quete-img-desc">${im.desc}</div>`:''}
+              </div>`).join('')}
+          </div>`:''}
+        </div>`).join('')}
+    </div>`:''}
+  `;
+  document.getElementById('queteDetailBg').classList.add('open');
+}
+
+function closeQDetail(e){
+  if(e.target===document.getElementById('queteDetailBg'))
+    document.getElementById('queteDetailBg').classList.remove('open');
+}
+
+function openLightbox(src){
+  document.getElementById('lightboxImg').src=src;
+  document.getElementById('lightbox').classList.add('open');
+}
+
+function openQModal(editId=null){
+  pendingQEdit=editId;
+  const qt=editId?quetes.find(q=>q.id===editId):null;
+  document.getElementById('qNom').value=qt?qt.nom:'';
+  document.getElementById('qDesc').value=qt?qt.desc:'';
+  document.getElementById('qReward').value=qt?qt.reward:'';
+  document.getElementById('qNom').style.borderColor='';
+  document.getElementById('qmodal-title').textContent=editId?'Modifier la quête':'Ajouter une quête';
+  const typeEl=document.getElementById('qType');
+  for(let o of typeEl.options){if(o.value===(qt?qt.type:'principale')){o.selected=true;break;}}
+  const vsel=document.getElementById('qVendeur');
+  for(let o of vsel.options){if(o.value===(qt?qt.vendeur:vendors[0])){o.selected=true;break;}}
+  qSteps=qt&&qt.etapes?qt.etapes.map(e=>({...e,imgs:(e.imgs||[]).map(i=>({...i}))})):[];
+  renderStepSlots();
+  document.getElementById('qmodalBg').classList.add('open');
+}
+
+function closeQModal(){document.getElementById('qmodalBg').classList.remove('open');pendingQEdit=null;qSteps=[];}
+document.getElementById('qmodalBg').addEventListener('click',function(e){if(e.target===this)closeQModal();});
+
+function addStep(){
+  qSteps.push({titre:'',desc:'',imgs:[]});
+  renderStepSlots();
+}
+
+function delStep(i){qSteps.splice(i,1);renderStepSlots();}
+
+function addStepImg(stepIdx){
+  const input=document.createElement('input');
+  input.type='file';input.accept='image/*';
+  input.onchange=e=>{
+    const file=e.target.files[0];if(!file)return;
+    const r=new FileReader();
+    r.onload=ev=>{
+      qSteps[stepIdx].imgs.push({src:ev.target.result,coords:'',desc:''});
+      renderStepSlots();
+    };r.readAsDataURL(file);
+  };input.click();
+}
+
+function delStepImg(si,ii){qSteps[si].imgs.splice(ii,1);renderStepSlots();}
+
+function renderStepSlots(){
+  const c=document.getElementById('qStepSlots');
+  if(qSteps.length===0){
+    c.innerHTML=`<div style="text-align:center;color:#2a2820;font-size:12px;letter-spacing:2px;text-transform:uppercase;padding:20px;border:1px dashed #1e2228">Aucune étape — cliquez sur "+ Ajouter une étape"</div>`;
+    return;
+  }
+  c.innerHTML=qSteps.map((s,si)=>`
+    <div class="step-slot">
+      <div class="step-slot-header">
+        <span class="step-slot-num">ÉTAPE ${si+1}</span>
+        <button class="step-slot-del" onclick="delStep(${si})">✕ Supprimer l'étape</button>
+      </div>
+      <input type="text" placeholder="Titre de l'étape (ex: Trouver le générateur)" value="${s.titre||''}" oninput="qSteps[${si}].titre=this.value"/>
+      <textarea placeholder="Description détaillée de cette étape..." rows="3" oninput="qSteps[${si}].desc=this.value">${s.desc||''}</textarea>
+      <div class="step-imgs-list">
+        ${(s.imgs||[]).map((im,ii)=>`
+          <div class="step-img-row">
+            <img src="${im.src}" alt=""/>
+            <div class="step-img-row-info">
+              <input type="text" placeholder="Coordonnées (ex: X:1250 Y:430)" value="${im.coords||''}" oninput="qSteps[${si}].imgs[${ii}].coords=this.value"/>
+              <input type="text" placeholder="Description de l'image..." value="${im.desc||''}" oninput="qSteps[${si}].imgs[${ii}].desc=this.value"/>
+            </div>
+            <button class="step-img-row-del" onclick="delStepImg(${si},${ii})">✕</button>
+          </div>`).join('')}
+      </div>
+      <button class="add-step-img-btn" onclick="addStepImg(${si})">+ Ajouter une image à cette étape</button>
+    </div>`).join('');
+}
+
+function saveQuete(){
+  const nom=document.getElementById('qNom').value.trim();
+  if(!nom){document.getElementById('qNom').style.borderColor='#c94c4c';return;}
+  if(!pendingQEdit){
+    const exists=quetes.find(q=>q.nom.toLowerCase()===nom.toLowerCase());
+    if(exists){toast('⚠ Une quête avec ce nom existe déjà !');return;}
+  }
+  const qt={
+    id:pendingQEdit||(Date.now()+'_'+Math.random().toString(36).slice(2)),
+    nom,
+    type:document.getElementById('qType').value,
+    vendeur:document.getElementById('qVendeur').value,
+    desc:document.getElementById('qDesc').value.trim(),
+    reward:document.getElementById('qReward').value.trim(),
+    etapes:qSteps.map(s=>({...s,imgs:[...s.imgs]}))
+  };
+  if(pendingQEdit){
+    const idx=quetes.findIndex(q=>q.id===pendingQEdit);
+    if(idx>-1)quetes[idx]=qt;
+    toast('Quête modifiée');
+  } else {
+    quetes.push(qt);
+    toast('Quête ajoutée');
+  }
+  closeQModal();
+  renderQuetes();
+}
+
+function delQuete(id){quetes=quetes.filter(q=>q.id!==id);renderQuetes();}
 
 init();
 </script>
