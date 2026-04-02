@@ -146,6 +146,11 @@ select.ctrl option{background:#14171c}
 .quete-detail-bg.open{display:block}
 .quete-detail{max-width:800px;margin:40px auto;background:#14171c;border:1px solid #c9a84c33;border-top:3px solid #c9a84c;padding:32px;position:relative}
 .quete-detail-close{position:absolute;top:16px;right:16px;background:transparent;border:none;color:#7a7060;font-size:20px;cursor:pointer;transition:color 0.1s}
+.quete-cover{width:100%;max-height:280px;object-fit:cover;display:block;margin-bottom:20px;cursor:zoom-in}
+.quete-cover-placeholder{width:100%;height:160px;background:#0d0f11;border:1px dashed #c9a84c22;display:flex;align-items:center;justify-content:center;margin-bottom:20px;cursor:pointer;transition:border 0.15s}
+.quete-cover-placeholder:hover{border-color:#c9a84c44}
+.quete-cover-hint{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#2a2820}
+.quete-cover-preview{width:100%;height:160px;object-fit:cover;display:block}
 .quete-detail-close:hover{color:#c9a84c}
 .quete-detail-type{font-size:10px;letter-spacing:3px;text-transform:uppercase;margin-bottom:8px}
 .quete-detail-title{font-size:26px;font-weight:700;color:#c9a84c;letter-spacing:2px;margin-bottom:4px}
@@ -380,6 +385,13 @@ select.ctrl option{background:#14171c}
         <label>Récompense</label>
         <input type="text" id="qReward" placeholder="Ex: 5 000 $ + Réputation"/>
       </div>
+    </div>
+    <div class="field">
+      <label>Image de présentation (optionnel)</label>
+      <div id="qCoverPreview" class="quete-cover-placeholder" onclick="document.getElementById('qCoverFile').click()">
+        <span class="quete-cover-hint">Cliquer pour importer une image de présentation</span>
+      </div>
+      <input type="file" id="qCoverFile" accept="image/*" style="display:none" onchange="loadQCover(event)"/>
     </div>
     <div class="field">
       <label>Description générale de la quête</label>
@@ -657,6 +669,7 @@ function toast(msg){
 let quetes=[];
 let pendingQEdit=null;
 let qSteps=[];
+let qCoverPending=null;
 const qFilters={principale:true,secondaire:true,contrat:true,deblocage:true};
 
 function initQuetes(){
@@ -700,7 +713,8 @@ function renderQuetes(){
   const totalImgs=qt=>(qt.etapes||[]).reduce((a,e)=>a+(e.imgs||[]).length,0);
   grid.innerHTML=filtered.map(qt=>`
     <div class="quete-card ${qt.type}" onclick="openQDetail('${qt.id}')">
-      <div class="quete-card-header">
+      ${qt.cover?`<img src="${qt.cover}" alt="" style="width:100%;height:100px;object-fit:cover;display:block;opacity:0.7"/>`:''}
+      <div class="quete-card-header" style="padding-top:${qt.cover?'10px':'0'}">
         <div class="quete-card-title">${qt.nom}</div>
         <span class="quete-type-pill ${typePillClass(qt.type)}">${typeLabel(qt.type)}</span>
       </div>
@@ -722,6 +736,7 @@ function openQDetail(id){
   const etapes=qt.etapes||[];
   document.getElementById('queteDetail').innerHTML=`
     <button class="quete-detail-close" onclick="document.getElementById('queteDetailBg').classList.remove('open')">✕</button>
+    ${qt.cover?`<img src="${qt.cover}" alt="Présentation" class="quete-cover" onclick="openLightbox('${qt.cover}')"/>`:''}
     <div class="quete-detail-type ${typePillClass(qt.type)}">${typeLabel(qt.type)}</div>
     <div class="quete-detail-title">${qt.nom}</div>
     <div class="quete-detail-vendor">${qt.vendeur}</div>
@@ -772,12 +787,25 @@ function openQModal(editId=null){
   const vsel=document.getElementById('qVendeur');
   for(let o of vsel.options){if(o.value===(qt?qt.vendeur:vendors[0])){o.selected=true;break;}}
   qSteps=qt&&qt.etapes?qt.etapes.map(e=>({...e,imgs:(e.imgs||[]).map(i=>({...i}))})):[];
+  qCoverPending=qt&&qt.cover?qt.cover:null;
+  const cp=document.getElementById('qCoverPreview');
+  cp.innerHTML=qCoverPending?`<img src="${qCoverPending}" class="quete-cover-preview"/>`:'<span class="quete-cover-hint">Cliquer pour importer une image de présentation</span>';
+  document.getElementById('qCoverFile').value='';
   renderStepSlots();
   document.getElementById('qmodalBg').classList.add('open');
 }
 
-function closeQModal(){document.getElementById('qmodalBg').classList.remove('open');pendingQEdit=null;qSteps=[];}
+function closeQModal(){document.getElementById('qmodalBg').classList.remove('open');pendingQEdit=null;qSteps=[];qCoverPending=null;}
 document.getElementById('qmodalBg').addEventListener('click',function(e){if(e.target===this)closeQModal();});
+
+function loadQCover(e){
+  const file=e.target.files[0];if(!file)return;
+  const r=new FileReader();
+  r.onload=ev=>{
+    qCoverPending=ev.target.result;
+    document.getElementById('qCoverPreview').innerHTML=`<img src="${qCoverPending}" class="quete-cover-preview"/>`;
+  };r.readAsDataURL(file);
+}
 
 function addStep(){
   qSteps.push({titre:'',desc:'',imgs:[]});
@@ -844,6 +872,7 @@ function saveQuete(){
     vendeur:document.getElementById('qVendeur').value,
     desc:document.getElementById('qDesc').value.trim(),
     reward:document.getElementById('qReward').value.trim(),
+    cover:qCoverPending||null,
     etapes:qSteps.map(s=>({...s,imgs:[...s.imgs]}))
   };
   if(pendingQEdit){
