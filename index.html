@@ -237,12 +237,112 @@ select.ctrl option{background:#14171c}
 .footer-left{font-size:13px;letter-spacing:2px;text-transform:uppercase;color:#5a5248}
 .footer-sig{font-family:'Share Tech Mono',monospace;font-size:14px;color:#c9a84c77;letter-spacing:2px}
 .footer-sig span{color:#c9a84c}
+
+/* ── NOUVELLES ANIMATIONS ── */
+@keyframes scanline{0%{top:-8%}100%{top:108%}}
+@keyframes glitch1{0%,90%,100%{clip-path:none;transform:none}91%{clip-path:inset(20% 0 60% 0);transform:translateX(-4px)}93%{clip-path:inset(55% 0 30% 0);transform:translateX(4px)}95%{clip-path:none;transform:none}}
+@keyframes glitch2{0%,88%,100%{opacity:0}89%{opacity:1;clip-path:inset(70% 0 15% 0);transform:translateX(6px);color:#c94c4c}91%{opacity:0}}
+@keyframes fadeSlideUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes pulseGold{0%,100%{box-shadow:0 0 0 0 #c9a84c33}50%{box-shadow:0 0 0 6px #c9a84c00}}
+@keyframes borderGlow{0%,100%{border-color:#c9a84c33}50%{border-color:#c9a84c88}}
+
+/* ── PAGE TRANSITIONS ── */
+.page.active{animation:fadeSlideUp 0.25s ease}
+
+/* ── NAVBAR AMÉLIORÉE ── */
+.navbar{backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);background:rgba(6,8,9,0.92)}
+.navbar::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,#c9a84c44,transparent)}
+.nav-link.active{text-shadow:0 0 12px #c9a84c55}
+.nav-link:hover{text-shadow:0 0 8px #c9a84c33}
+
+/* ── HERO SCANLINE ── */
+.hero-scanline{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.hero-scanline::before{content:'';position:absolute;left:0;right:0;height:8%;background:linear-gradient(transparent,#c9a84c08,transparent);animation:scanline 8s linear infinite}
+.hero-scanline::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.03) 2px,rgba(0,0,0,0.03) 4px);pointer-events:none}
+
+/* ── HERO TITLE GLITCH ── */
+.hero-title{position:relative}
+.hero-title::before{content:attr(data-text);position:absolute;inset:0;color:#c9a84c;animation:glitch1 6s infinite}
+.hero-title::after{content:attr(data-text);position:absolute;inset:0;animation:glitch2 6s infinite}
+
+/* ── HERO STATS ── */
+.hero-stats{display:flex;gap:1px;background:#c9a84c1a;border:1px solid #c9a84c22;margin-top:4px}
+.hero-stat{flex:1;padding:10px 20px;background:#0d0f12;text-align:center}
+.hero-stat-v{font-family:'Share Tech Mono',monospace;font-size:22px;color:#c9a84c;display:block}
+.hero-stat-l{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#5a5248;margin-top:2px;display:block}
+.hero-stat-sep{width:1px;background:#c9a84c22;flex-shrink:0}
+
+/* ── VENDEUR CHIPS INTERACTIFS ── */
+.vchip{cursor:pointer;transition:all 0.15s;border-bottom:2px solid transparent;padding:10px 18px}
+.vchip:hover{color:#c9a84c;background:#c9a84c08}
+.vchip.active{color:#c9a84c;border-bottom-color:#c9a84c;background:#c9a84c0a}
+.vchip .spec{color:#c9a84c44;font-size:11px;margin-left:4px;letter-spacing:1px;transition:color 0.15s}
+.vchip.active .spec{color:#c9a84c66}
+
+/* ── ROWS AMÉLIORÉES ── */
+.row:hover{background:#1a1d23;box-shadow:inset 3px 0 0 #c9a84c33}
+.row.universal:hover{box-shadow:inset 3px 0 0 #c9a84c88}
+.row-price{cursor:pointer;position:relative}
+.row-price:hover::after{content:'copié!';position:absolute;top:-20px;left:50%;transform:translateX(-50%);font-size:9px;color:#c9a84c;letter-spacing:1px;white-space:nowrap}
+
+/* ── QUÊTE COMPLETION ── */
+.quete-card.completed{opacity:0.45;filter:grayscale(0.4)}
+.quete-card.completed .quete-card-title{text-decoration:line-through;text-decoration-color:#c9a84c55}
+.quete-done-btn{background:transparent;border:1px solid #c9a84c22;color:#2a2820;font-size:10px;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:3px 8px;cursor:pointer;transition:all 0.15s}
+.quete-done-btn:hover{border-color:#5a8a5a;color:#5a8a5a}
+.quete-done-btn.done{border-color:#5a8a5a55;color:#5a8a5a;background:#5a8a5a11}
+.quete-card-footer{flex-wrap:wrap;gap:6px}
+
+/* ── SEARCH HIGHLIGHT ── */
+.hl{background:#c9a84c33;color:#e8d89a;border-radius:2px;padding:0 1px}
+
+/* ── CONFIRMATION DELETE ── */
+.confirm-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:600;align-items:center;justify-content:center}
+.confirm-overlay.open{display:flex}
+.confirm-box{background:#14171c;border:1px solid #c94c4c44;border-top:3px solid #c94c4c;padding:28px 32px;max-width:400px;width:90%;text-align:center}
+.confirm-title{font-size:13px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#c94c4c;margin-bottom:10px}
+.confirm-msg{font-size:15px;color:#7a7060;margin-bottom:22px;line-height:1.6}
+.confirm-actions{display:flex;gap:8px;justify-content:center}
+
+/* ── TRI NOM ── */
+select.ctrl{transition:border 0.15s}
+
+/* ── MOBILE NAV ── */
+.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px}
+.nav-hamburger span{width:22px;height:2px;background:#c9a84c;transition:all 0.2s}
+@media(max-width:640px){
+  .nav-hamburger{display:flex}
+  .nav-links{display:none;position:absolute;top:52px;left:0;right:0;background:#060809;flex-direction:column;border-bottom:1px solid #c9a84c33;z-index:99}
+  .nav-links.open{display:flex}
+  .nav-link{height:44px;border-bottom:1px solid #c9a84c11;border-right:none;border-left:3px solid transparent}
+  .nav-link.active{border-left-color:#c9a84c;border-bottom:none}
+  .hero-stats{flex-direction:column;gap:1px}
+  .hero-stat-sep{width:auto;height:1px}
+  .list-header{display:none}
+  .row{grid-template-columns:80px 1fr 140px;min-height:80px}
+  .row>div:nth-child(4),.row>div:nth-child(5){display:none}
+}
+
+/* ── TOAST AMÉLIORÉ ── */
+.toast{display:flex;align-items:center;gap:10px;border-radius:2px;font-size:12px}
+.toast::before{content:'◆';font-size:8px;flex-shrink:0}
+
+/* ── SORT CONTROLS ── */
+.sort-group{display:flex;gap:2px}
+.sort-btn{padding:8px 12px;font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:700;letter-spacing:1px;cursor:pointer;text-transform:uppercase;transition:all 0.15s;border:1px solid #c9a84c33;background:#0f1216;color:#5a5248;white-space:nowrap}
+.sort-btn.active{color:#c9a84c;background:#c9a84c11;border-color:#c9a84c55}
+.sort-btn:hover{border-color:#c9a84c55;color:#c9a84c77}
+
+/* ── QUÊTE PROGRESS BAR ── */
+.quete-progress{height:2px;background:#1e2228;margin-top:10px;border-radius:0}
+.quete-progress-fill{height:100%;background:linear-gradient(90deg,#c9a84c,#e0bc5c);transition:width 0.4s ease}
 </style>
 </head>
 <body>
 
 <!-- NAVBAR -->
-<nav class="navbar">
+<nav class="navbar" style="position:relative">
   <div class="nav-brand" onclick="goPage('accueil')">
     <img id="navLogo" src="" alt="FoS"/>
     <div>
@@ -250,17 +350,21 @@ select.ctrl option{background:#14171c}
       <div class="nav-brand-sub">Gray Zone Warfare</div>
     </div>
   </div>
-  <div class="nav-links">
+  <div class="nav-hamburger" onclick="toggleNav()" id="navHamburger">
+    <span></span><span></span><span></span>
+  </div>
+  <div class="nav-links" id="navLinks">
     <div class="nav-link active" id="nav-accueil" onclick="goPage('accueil')">Accueil</div>
     <div class="nav-link" id="nav-ventes" onclick="goPage('ventes')">Ventes</div>
     <div class="nav-link" id="nav-quetes" onclick="goPage('quetes')">Quêtes</div>
-    <div class="nav-link disabled" id="nav-carte" onclick="goPage('carte')">Carte <span style="font-size:9px;margin-left:4px;opacity:0.4">bientôt</span></div>
+    <div class="nav-link" id="nav-carte" onclick="goPage('carte')">Carte</div>
   </div>
 </nav>
 
 <!-- PAGE ACCUEIL -->
 <div class="page active" id="page-accueil">
   <div class="hero">
+    <div class="hero-scanline"></div>
     <div class="hero-corner tl"></div>
     <div class="hero-corner tr"></div>
     <div class="hero-corner bl"></div>
@@ -273,14 +377,30 @@ select.ctrl option{background:#14171c}
     </div>
     <div class="hero-content">
       <span class="hero-tag">Forces Spéciales</span>
-      <div class="hero-title">F<span>o</span>S</div>
+      <div class="hero-title" data-text="FoS">F<span>o</span>S</div>
       <img src="v3_fini.gif" alt="FoS Animation" class="hero-gif"/>
       <div class="hero-subtitle">Les Forces Spéciales — Gray Zone Warfare</div>
       <div class="hero-divider"></div>
       <p class="hero-desc">Bienvenue sur le portail de la team FoS. Retrouvez ici les objets disponibles à la vente auprès des différents vendeurs.</p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <span class="hero-stat-v" id="heroItemCount">—</span>
+          <span class="hero-stat-l">Objets en vente</span>
+        </div>
+        <div class="hero-stat-sep"></div>
+        <div class="hero-stat">
+          <span class="hero-stat-v" id="heroQueteCount">—</span>
+          <span class="hero-stat-l">Quêtes répertoriées</span>
+        </div>
+        <div class="hero-stat-sep"></div>
+        <div class="hero-stat">
+          <span class="hero-stat-v" id="heroVendorCount">7</span>
+          <span class="hero-stat-l">Vendeurs actifs</span>
+        </div>
+      </div>
       <div class="hero-btn-row">
         <button class="hero-btn hero-btn-primary" onclick="goPage('ventes')">Accéder aux ventes</button>
-        <button class="hero-btn hero-btn-secondary" onclick="goPage('carte')">Voir la carte</button>
+        <button class="hero-btn hero-btn-secondary" onclick="goPage('quetes')">Voir les quêtes</button>
       </div>
     </div>
   </div>
@@ -294,10 +414,13 @@ select.ctrl option{background:#14171c}
       <span class="s-ico">&#9906;</span>
       <input type="text" id="search" placeholder="Rechercher un objet..." oninput="renderList()"/>
     </div>
-    <select class="ctrl" id="vendorFilter" onchange="renderList()">
+    <select class="ctrl" id="vendorFilter" onchange="syncVendorBar();renderList()">
       <option value="">Tous les vendeurs</option>
     </select>
-    <button class="btn btn-ghost" id="sortBtn" onclick="toggleSort()">Prix ↑</button>
+    <div class="sort-group">
+      <button class="sort-btn active" id="sortPrix" onclick="setSortField('prix')">Prix ↑</button>
+      <button class="sort-btn" id="sortNom" onclick="setSortField('nom')">Nom ↑</button>
+    </div>
     <button class="btn btn-muted" onclick="document.getElementById('importFile').click()">&#8599; Importer</button>
     <input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(event)"/>
     <button class="btn btn-ghost" onclick="exportData()">&#8600; Exporter</button>
@@ -416,14 +539,22 @@ select.ctrl option{background:#14171c}
   <img id="lightboxImg" src="" alt=""/>
 </div>
 
+<!-- CONFIRMATION SUPPRESSION -->
+<div class="confirm-overlay" id="confirmOverlay">
+  <div class="confirm-box">
+    <div class="confirm-title">Confirmer la suppression</div>
+    <div class="confirm-msg" id="confirmMsg">Voulez-vous vraiment supprimer cet élément ?</div>
+    <div class="confirm-actions">
+      <button class="btn btn-muted" onclick="closeConfirm()">Annuler</button>
+      <button class="btn" style="background:#c94c4c11;border-color:#c94c4c44;color:#c94c4c" id="confirmOkBtn">Supprimer</button>
+    </div>
+  </div>
+</div>
+
 <!-- CARTE PAGE -->
 <div class="page" id="page-carte">
-  <div class="map-page">
-    <div class="map-placeholder">
-      <div class="map-icon">&#9974;</div>
-      Carte à venir<br>
-      <span style="font-size:9px;color:#1a1816">Envoyez votre carte à intégrer</span>
-    </div>
+  <div style="height:calc(100vh - 52px);width:100%;position:relative;background:#0a0c0e">
+    <iframe src="https://mapgenie.io/gray-zone-warfare/maps/lamang-island" style="width:100%;height:100%;border:none;display:block" allowfullscreen></iframe>
   </div>
 </div>
 
@@ -476,13 +607,18 @@ function goPage(p){
   document.getElementById('page-'+p).classList.add('active');
   const nl=document.getElementById('nav-'+p);
   if(nl&&!nl.classList.contains('disabled'))nl.classList.add('active');
+  document.getElementById('navLinks').classList.remove('open');
+  if(p==='accueil')updateHeroStats();
+}
+
+function toggleNav(){
+  document.getElementById('navLinks').classList.toggle('open');
 }
 
 function init(){
   document.getElementById('navLogo').src=FOS_IMG;
 
-  const vbar=document.getElementById('vbar');
-  vbar.innerHTML=vendors.map(v=>`<div class="vchip">${v}${specs[v]?`<span class="spec">${specs[v]}</span>`:''}</div>`).join('');
+  buildVendorBar();
 
   const fsel=document.getElementById('vendorFilter');
   const msel=document.getElementById('mVendeur');
@@ -498,40 +634,93 @@ function init(){
   initQuetes();
 }
 
-async function autoLoad(){
-  try{
-    const r=await fetch('data.json?v='+Date.now());
-    if(!r.ok)throw new Error();
-    const data=await r.json();
-    if(data.items&&Array.isArray(data.items)){
-      items=data.items;
-      const ver=document.getElementById('sumVersion');
-      if(ver)ver.textContent=data.version||'—';
-      toast('Liste chargée — '+items.length+' objets');
-    }
-  }catch{
-    // Pas de data.json trouvé, on démarre vide
-  }
+function buildVendorBar(){
+  const vbar=document.getElementById('vbar');
+  const cur=document.getElementById('vendorFilter').value;
+  vbar.innerHTML=`<div class="vchip${!cur?' active':''}" onclick="setVendorFilter('')">Tous</div>`+
+    vendors.map(v=>`<div class="vchip${cur===v?' active':''}" onclick="setVendorFilter('${v}')">${v}${specs[v]?`<span class="spec">${specs[v]}</span>`:''}</div>`).join('')+
+    `<div class="vchip${cur==='TOUS'?' active':''}" onclick="setVendorFilter('TOUS')">Prix fixe <span class="spec">tous vendeurs</span></div>`;
+}
+
+function setVendorFilter(v){
+  document.getElementById('vendorFilter').value=v;
+  buildVendorBar();
   renderList();
 }
 
-async function autoLoadQuetes(){
+function syncVendorBar(){buildVendorBar();}
+
+function updateHeroStats(){
+  const ic=document.getElementById('heroItemCount');
+  const qc=document.getElementById('heroQueteCount');
+  if(ic)ic.textContent=items.length||'—';
+  if(qc)qc.textContent=(typeof quetes!=='undefined'?quetes.length:0)||'—';
+}
+
+function saveItems(){
+  try{localStorage.setItem('fos_items',JSON.stringify(items));}catch(e){}
+}
+
+function saveQuetesStorage(){
+  try{localStorage.setItem('fos_quetes',JSON.stringify(quetes));}catch(e){}
+}
+
+async function autoLoad(){
+  let fromStorage=false;
   try{
-    const r=await fetch('quetes.json?v='+Date.now());
-    if(!r.ok)throw new Error();
-    const data=await r.json();
-    if(data.quetes&&Array.isArray(data.quetes)){
-      quetes=data.quetes;
-      toast('Quêtes chargées — '+quetes.length+' quêtes');
-    }
-  }catch{
-    // Pas de quetes.json, on démarre vide
+    const stored=localStorage.getItem('fos_items');
+    if(stored){const parsed=JSON.parse(stored);if(Array.isArray(parsed)){items=parsed;fromStorage=true;}}
+  }catch(e){}
+  if(!fromStorage){
+    try{
+      const r=await fetch('data.json?v='+Date.now());
+      if(!r.ok)throw new Error();
+      const data=await r.json();
+      if(data.items&&Array.isArray(data.items)){
+        items=data.items;
+        const ver=document.getElementById('sumVersion');
+        if(ver)ver.textContent=data.version||'—';
+        saveItems();
+        toast('Liste chargée — '+items.length+' objets');
+      }
+    }catch{}
+  }
+  renderList();
+  updateHeroStats();
+}
+
+async function autoLoadQuetes(){
+  let fromStorage=false;
+  try{
+    const stored=localStorage.getItem('fos_quetes');
+    if(stored){const parsed=JSON.parse(stored);if(Array.isArray(parsed)){quetes=parsed;fromStorage=true;}}
+  }catch(e){}
+  if(!fromStorage){
+    try{
+      const r=await fetch('quetes.json?v='+Date.now());
+      if(!r.ok)throw new Error();
+      const data=await r.json();
+      if(data.quetes&&Array.isArray(data.quetes)){
+        quetes=data.quetes;
+        saveQuetesStorage();
+        toast('Quêtes chargées — '+quetes.length+' quêtes');
+      }
+    }catch{}
   }
   renderQuetes();
+  updateHeroStats();
 }
 
 function checkAllNote(){
   document.getElementById('allNote').style.display=document.getElementById('mVendeur').value==='TOUS'?'block':'none';
+}
+
+let sortField='prix';
+
+function highlight(text,q){
+  if(!q)return text;
+  const re=new RegExp('('+q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi');
+  return text.replace(re,'<span class="hl">$1</span>');
 }
 
 function renderList(){
@@ -542,28 +731,50 @@ function renderList(){
     const mv=!vf||(vf==='TOUS'?it.vendeur==='TOUS':it.vendeur===vf);
     return mq&&mv;
   });
-  filtered.sort((a,b)=>sortDir*((parseFloat(a.prix)||0)-(parseFloat(b.prix)||0)));
+  if(sortField==='prix'){
+    filtered.sort((a,b)=>sortDir*((parseFloat(a.prix)||0)-(parseFloat(b.prix)||0)));
+  } else {
+    filtered.sort((a,b)=>sortDir*a.nom.localeCompare(b.nom,'fr'));
+  }
   const list=document.getElementById('list');
   const empty=document.getElementById('empty');
+  const priceMax=items.reduce((m,it)=>Math.max(m,parseFloat(it.prix)||0),0);
   if(filtered.length===0){list.innerHTML='';empty.style.display='block';}
   else{
     empty.style.display='none';
-    list.innerHTML=filtered.map((it,i)=>`
-      <div class="row${it.vendeur==='TOUS'?' universal':''}">
+    list.innerHTML=filtered.map((it)=>{
+      const priceNum=parseFloat(it.prix)||0;
+      const pct=priceMax>0?Math.round(priceNum/priceMax*100):0;
+      return`<div class="row${it.vendeur==='TOUS'?' universal':''}">
         <div class="row-img">${it.img?`<img src="${it.img}"/>`:`<span class="img-ph">IMG</span>`}</div>
-        <div class="row-name" style="padding:0 16px;font-size:17px">${it.nom}</div>
-        <div style="padding:0 12px">${it.vendeur==='TOUS'?`<span class="row-vendor all-v">Tous les vendeurs</span>`:`<span class="row-vendor">${it.vendeur}</span>`}</div>
-        <div class="row-price" style="font-size:16px">${it.prix?(parseFloat(it.prix)).toLocaleString('fr-FR')+' $':'—'}</div>
+        <div class="row-name" style="padding:0 16px;font-size:17px">${highlight(it.nom,q)}</div>
+        <div style="padding:0 12px">${it.vendeur==='TOUS'?`<span class="row-vendor all-v">Tous les vendeurs</span>`:`<span class="row-vendor">${highlight(it.vendeur,q)}</span>`}</div>
+        <div class="row-price" style="font-size:16px" onclick="copyPrice('${it.prix||0}')" title="Cliquer pour copier">${it.prix?(parseFloat(it.prix)).toLocaleString('fr-FR')+' $':'—'}</div>
         <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:0 6px">
           <button class="del-btn" style="color:#c9a84c77;font-size:11px" onclick="editItem('${it.id}')">✏ Modifier</button>
-          <button class="del-btn" onclick="delItem('${it.id}')">✕ Suppr.</button>
+          <button class="del-btn" onclick="confirmAction(()=>delItem('${it.id}'),'Supprimer <b>${it.nom.replace(/'/g,"&#39;")}</b> ?')">✕ Suppr.</button>
         </div>
-      </div>`).join('');
+      </div>`;
+    }).join('');
   }
   document.getElementById('sumCount').textContent=items.length;
+  buildVendorBar();
 }
 
-function toggleSort(){sortDir*=-1;document.getElementById('sortBtn').textContent=sortDir===1?'Prix ↑':'Prix ↓';renderList();}
+function copyPrice(prix){
+  navigator.clipboard.writeText(prix).then(()=>toast('Prix copié : '+parseFloat(prix).toLocaleString('fr-FR')+' $')).catch(()=>{});
+}
+
+function setSortField(field){
+  if(sortField===field){sortDir*=-1;}else{sortField=field;sortDir=1;}
+  document.getElementById('sortPrix').classList.toggle('active',sortField==='prix');
+  document.getElementById('sortNom').classList.toggle('active',sortField==='nom');
+  const arrow=sortDir===1?'↑':'↓';
+  document.getElementById('sortPrix').textContent='Prix '+arrow;
+  document.getElementById('sortNom').textContent='Nom '+arrow;
+  if(sortField==='prix'&&sortDir===1)document.getElementById('sortPrix').textContent='Prix ↑';
+  renderList();
+}
 
 let pendingEdit=null;
 
@@ -597,8 +808,6 @@ function editItem(id){openModal(id);}
 
 function closeModal(){document.getElementById('modalBg').classList.remove('open');pendingEdit=null;}
 document.getElementById('modalBg').addEventListener('click',function(e){if(e.target===this)closeModal();});
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
-
 function loadImg(e){
   const file=e.target.files[0];if(!file)return;
   const r=new FileReader();
@@ -628,11 +837,22 @@ function saveItem(){
       toast('Objet modifié');
     }
   }
+  saveItems();
+  updateHeroStats();
   closeModal();
   renderList();
 }
 
-function delItem(id){items=items.filter(i=>i.id!==id);renderList();}
+function delItem(id){items=items.filter(i=>i.id!==id);saveItems();updateHeroStats();renderList();}
+
+function confirmAction(cb,msg='Confirmer ?'){
+  document.getElementById('confirmMsg').innerHTML=msg;
+  const btn=document.getElementById('confirmOkBtn');
+  btn.onclick=()=>{cb();closeConfirm();};
+  document.getElementById('confirmOverlay').classList.add('open');
+}
+function closeConfirm(){document.getElementById('confirmOverlay').classList.remove('open');}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeConfirm();}});
 
 function exportData(){
   if(items.length===0){toast('Aucun objet à exporter');return;}
@@ -698,12 +918,14 @@ function renderQuetes(){
   let filtered=quetes.filter(qt=>{
     if(!qFilters[qt.type])return false;
     if(vf&&qt.vendeur!==vf)return false;
-    if(q&&!qt.nom.toLowerCase().includes(q)&&!qt.desc.toLowerCase().includes(q))return false;
+    if(q&&!qt.nom.toLowerCase().includes(q)&&!(qt.desc||'').toLowerCase().includes(q))return false;
     return true;
   });
   const grid=document.getElementById('quetes-grid');
   const empty=document.getElementById('quetes-empty');
-  document.getElementById('qCount').textContent=quetes.length;
+  const total=quetes.length;
+  const done=quetes.filter(q=>q.completed).length;
+  document.getElementById('qCount').textContent=total+(done>0?` (${done} terminée${done>1?'s':''})`:'');
   document.getElementById('qPrincipale').textContent=quetes.filter(q=>q.type==='principale').length;
   document.getElementById('qSecondaire').textContent=quetes.filter(q=>q.type==='secondaire').length;
   document.getElementById('qContrat').textContent=quetes.filter(q=>q.type==='contrat').length;
@@ -711,24 +933,36 @@ function renderQuetes(){
   if(filtered.length===0){grid.innerHTML='';empty.style.display='block';return;}
   empty.style.display='none';
   const totalImgs=qt=>(qt.etapes||[]).reduce((a,e)=>a+(e.imgs||[]).length,0);
+  const pct=total>0?Math.round(done/total*100):0;
   grid.innerHTML=filtered.map(qt=>`
-    <div class="quete-card ${qt.type}" onclick="openQDetail('${qt.id}')">
+    <div class="quete-card ${qt.type}${qt.completed?' completed':''}" onclick="openQDetail('${qt.id}')">
       ${qt.cover?`<img src="${qt.cover}" alt="" style="width:100%;height:100px;object-fit:cover;display:block;opacity:0.7"/>`:''}
       <div class="quete-card-header" style="padding-top:${qt.cover?'10px':'0'}">
-        <div class="quete-card-title">${qt.nom}</div>
+        <div class="quete-card-title">${highlight(qt.nom,q)}</div>
         <span class="quete-type-pill ${typePillClass(qt.type)}">${typeLabel(qt.type)}</span>
       </div>
       <div class="quete-card-vendor">${qt.vendeur}</div>
-      <div class="quete-card-desc">${qt.desc||'—'}</div>
+      <div class="quete-card-desc">${qt.desc?highlight(qt.desc,q):'—'}</div>
       <div class="quete-card-footer">
         <span class="quete-card-reward">${qt.reward?'🎁 '+qt.reward:''}</span>
-        <span class="quete-card-imgs">${(qt.etapes||[]).length} étape${(qt.etapes||[]).length>1?'s':''} · ${totalImgs(qt)} img</span>
+        <span class="quete-card-imgs">${(qt.etapes||[]).length} étape${(qt.etapes||[]).length!==1?'s':''} · ${totalImgs(qt)} img</span>
         <div class="quete-card-actions" onclick="event.stopPropagation()">
-          <button class="quete-act-btn" style="color:#c9a84c77" onclick="openQModal('${qt.id}')">✏ Modifier</button>
-          <button class="quete-act-btn" style="color:#3a3030" onmouseenter="this.style.color='#c94c4c'" onmouseleave="this.style.color='#3a3030'" onclick="delQuete('${qt.id}')">✕ Suppr.</button>
+          <button class="quete-done-btn${qt.completed?' done':''}" onclick="toggleQComplete('${qt.id}')">${qt.completed?'✓ Terminée':'○ Terminée'}</button>
+          <button class="quete-act-btn" style="color:#c9a84c77" onclick="openQModal('${qt.id}')">✏</button>
+          <button class="quete-act-btn" style="color:#3a3030" onmouseenter="this.style.color='#c94c4c'" onmouseleave="this.style.color='#3a3030'" onclick="confirmAction(()=>delQuete('${qt.id}'),'Supprimer la quête <b>${qt.nom.replace(/'/g,"&#39;")}</b> ?')">✕</button>
         </div>
       </div>
+      ${(qt.etapes||[]).length>0?`<div class="quete-progress"><div class="quete-progress-fill" style="width:${qt.completed?100:0}%"></div></div>`:''}
     </div>`).join('');
+}
+
+function toggleQComplete(id){
+  const qt=quetes.find(q=>q.id===id);
+  if(!qt)return;
+  qt.completed=!qt.completed;
+  saveQuetesStorage();
+  renderQuetes();
+  toast(qt.completed?'Quête marquée terminée ✓':'Quête remise en cours');
 }
 
 function openQDetail(id){
@@ -883,11 +1117,13 @@ function saveQuete(){
     quetes.push(qt);
     toast('Quête ajoutée');
   }
+  saveQuetesStorage();
+  updateHeroStats();
   closeQModal();
   renderQuetes();
 }
 
-function delQuete(id){quetes=quetes.filter(q=>q.id!==id);renderQuetes();}
+function delQuete(id){quetes=quetes.filter(q=>q.id!==id);saveQuetesStorage();updateHeroStats();renderQuetes();}
 
 function exportQuetes(){
   if(quetes.length===0){toast('Aucune quête à exporter');return;}
