@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>FoS — Gray Zone Warfare</title>
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&family=Bebas+Neue&display=swap" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Rajdhani',sans-serif;background:#0d0f12;color:#e8e0cc;min-height:100vh;overflow-x:hidden}
@@ -380,7 +381,7 @@ select.ctrl option{background:#14171c}
       <button class="sort-btn" id="sortNom" onclick="setSortField('nom')">Nom ↑</button>
     </div>
     <button class="btn btn-muted" onclick="document.getElementById('importFile').click()">&#8599; Importer</button>
-    <input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(event)"/>
+    <input type="file" id="importFile" accept=".json,.zip" style="display:none" onchange="importData(event)"/>
     <button class="btn btn-ghost" onclick="exportData()">&#8600; Exporter</button>
     <button class="btn btn-gold" onclick="openModal()">+ Ajouter</button>
   </div>
@@ -405,7 +406,7 @@ select.ctrl option{background:#14171c}
     <button class="type-badge type-contrat on" id="f-contrat" onclick="toggleQFilter('contrat')">Contrat</button>
     <button class="type-badge type-deblocage on" id="f-deblocage" onclick="toggleQFilter('deblocage')">Déblocage Arme/Skin</button>
     <button class="btn btn-muted" onclick="document.getElementById('importQuetesFile').click()">&#8599; Importer</button>
-    <input type="file" id="importQuetesFile" accept=".json" style="display:none" onchange="importQuetes(event)"/>
+    <input type="file" id="importQuetesFile" accept=".json,.zip" style="display:none" onchange="importQuetes(event)"/>
     <button class="btn btn-ghost" onclick="exportQuetes()">&#8600; Exporter</button>
     <button class="btn btn-gold" onclick="openQModal()">+ Ajouter une quête</button>
   </div>
@@ -430,7 +431,7 @@ select.ctrl option{background:#14171c}
     <div class="caches-controls">
       <div class="search-wrap" style="flex:1;min-width:180px"><span class="s-ico">&#9906;</span><input type="text" id="cachesSearch" placeholder="Rechercher une cache..." oninput="renderCaches()" style="width:100%;background:#0f1216;border:1px solid #c9a84c33;color:#e8e0cc;padding:7px 12px 7px 34px;font-family:'Rajdhani',sans-serif;font-size:14px;outline:none"/></div>
       <button class="btn btn-muted" onclick="document.getElementById('importCachesFile').click()">&#8599; Importer</button>
-      <input type="file" id="importCachesFile" accept=".json" style="display:none" onchange="importCaches(event)"/>
+      <input type="file" id="importCachesFile" accept=".json,.zip" style="display:none" onchange="importCaches(event)"/>
       <button class="btn btn-ghost" onclick="exportCaches()">&#8600; Exporter</button>
       <button class="btn btn-gold" onclick="openCacheModal()">+ Ajouter une cache</button>
     </div>
@@ -671,8 +672,31 @@ function delItem(id){items=items.filter(i=>i.id!==id);saveItems();updateHeroStat
 function confirmAction(cb,msg){document.getElementById('confirmMsg').innerHTML=msg;document.getElementById('confirmOkBtn').onclick=()=>{cb();closeConfirm();};document.getElementById('confirmOverlay').classList.add('open');}
 function closeConfirm(){document.getElementById('confirmOverlay').classList.remove('open');}
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeConfirm();closeQModal();closeCacheModal();}});
-function exportData(){if(!items.length){toast('Aucun objet');return;}const d={version:new Date().toISOString().slice(0,16).replace('T',' '),items};const b=new Blob([JSON.stringify(d,null,2)],{type:'application/json'});const u=URL.createObjectURL(b);const a=document.createElement('a');a.href=u;a.download='fos_ventes_'+new Date().toISOString().slice(0,10)+'.json';a.click();}
-function importData(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{try{const d=JSON.parse(ev.target.result);if(d.items){items=d.items;saveItems();renderList();toast(items.length+' objets importés');}}catch{toast('Fichier invalide');}e.target.value='';};r.readAsText(f);}
+// ── ZIP HELPERS ──
+function b64ToUint8(b64){const s=b64.split(',')[1];const bin=atob(s);const arr=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)arr[i]=bin.charCodeAt(i);return arr;}
+function isB64(s){return s&&typeof s==='string'&&s.startsWith('data:');}
+let _imgCounter=0;
+function nextImgName(prefix,ext){_imgCounter++;return prefix+'_'+_imgCounter+'.'+ext;}
+
+async function exportData(){
+  if(!items.length){toast('Aucun objet');return;}
+  _imgCounter=0;
+  const zip=new JSZip();const imgFolder=zip.folder('images');
+  const clean=items.map(it=>{const c={...it};if(isB64(c.img)){const name=nextImgName('item','jpg');imgFolder.file(name,b64ToUint8(c.img));c.img='images/'+name;}return c;});
+  zip.file('data.json',JSON.stringify({version:new Date().toISOString().slice(0,16).replace('T',' '),items:clean},null,2));
+  const blob=await zip.generateAsync({type:'blob'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='fos_ventes_'+new Date().toISOString().slice(0,10)+'.zip';a.click();
+  toast('Export ZIP — '+items.length+' objets');
+}
+async function importData(e){
+  const f=e.target.files[0];if(!f)return;
+  if(f.name.endsWith('.json')){const r=new FileReader();r.onload=ev=>{try{const d=JSON.parse(ev.target.result);if(d.items){items=d.items;saveItems();renderList();toast(items.length+' objets importés');}}catch{toast('Fichier invalide');}};r.readAsText(f);
+  }else{
+    try{const zip=await JSZip.loadAsync(f);const json=await zip.file('data.json').async('string');const d=JSON.parse(json);
+    for(let it of d.items){if(it.img&&!isB64(it.img)&&zip.file(it.img)){const ab=await zip.file(it.img).async('base64');it.img='data:image/jpeg;base64,'+ab;}}
+    items=d.items;saveItems();renderList();toast(items.length+' objets importés depuis ZIP');}catch{toast('ZIP invalide');}
+  }e.target.value='';
+}
 function toast(msg){const t=document.createElement('div');t.className='toast';t.textContent=msg;document.body.appendChild(t);setTimeout(()=>t.remove(),2500);}
 
 // ── QUÊTES SYSTEM ──
@@ -786,8 +810,31 @@ function saveQuete(){
   saveQuetesStorage();updateHeroStats();closeQModal();renderQuetes();
 }
 function delQuete(id){quetes=quetes.filter(q=>q.id!==id);saveQuetesStorage();updateHeroStats();renderQuetes();}
-function exportQuetes(){if(!quetes.length){toast('Aucune quête');return;}const d={version:new Date().toISOString().slice(0,16).replace('T',' '),quetes};const b=new Blob([JSON.stringify(d,null,2)],{type:'application/json'});const u=URL.createObjectURL(b);const a=document.createElement('a');a.href=u;a.download='fos_quetes_'+new Date().toISOString().slice(0,10)+'.json';a.click();}
-function importQuetes(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{try{const d=JSON.parse(ev.target.result);if(d.quetes){quetes=d.quetes;saveQuetesStorage();renderQuetes();toast(quetes.length+' quêtes importées');}}catch{toast('Fichier invalide');}e.target.value='';};r.readAsText(f);}
+async function exportQuetes(){
+  if(!quetes.length){toast('Aucune quête');return;}
+  _imgCounter=0;
+  const zip=new JSZip();const imgF=zip.folder('images');
+  const clean=quetes.map(qt=>{const c={...qt,etapes:(qt.etapes||[]).map(e=>({...e,imgs:(e.imgs||[]).map(i=>({...i}))}))};
+    if(isB64(c.cover)){const n=nextImgName('cover','jpg');imgF.file(n,b64ToUint8(c.cover));c.cover='images/'+n;}
+    c.etapes.forEach(e=>{e.imgs.forEach(im=>{if(isB64(im.src)){const n=nextImgName('step','jpg');imgF.file(n,b64ToUint8(im.src));im.src='images/'+n;}});});
+    return c;});
+  zip.file('quetes.json',JSON.stringify({version:new Date().toISOString().slice(0,16).replace('T',' '),quetes:clean},null,2));
+  const blob=await zip.generateAsync({type:'blob'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='fos_quetes_'+new Date().toISOString().slice(0,10)+'.zip';a.click();
+  toast('Export ZIP — '+quetes.length+' quêtes');
+}
+async function importQuetes(e){
+  const f=e.target.files[0];if(!f)return;
+  if(f.name.endsWith('.json')){const r=new FileReader();r.onload=ev=>{try{const d=JSON.parse(ev.target.result);if(d.quetes){quetes=d.quetes;saveQuetesStorage();renderQuetes();toast(quetes.length+' quêtes importées');}}catch{toast('Fichier invalide');}};r.readAsText(f);
+  }else{
+    try{const zip=await JSZip.loadAsync(f);const json=await zip.file('quetes.json').async('string');const d=JSON.parse(json);
+    for(let qt of d.quetes){
+      if(qt.cover&&!isB64(qt.cover)&&zip.file(qt.cover)){const ab=await zip.file(qt.cover).async('base64');qt.cover='data:image/jpeg;base64,'+ab;}
+      for(let et of(qt.etapes||[])){for(let im of(et.imgs||[])){if(im.src&&!isB64(im.src)&&zip.file(im.src)){const ab=await zip.file(im.src).async('base64');im.src='data:image/jpeg;base64,'+ab;}}}
+    }
+    quetes=d.quetes;saveQuetesStorage();renderQuetes();updateHeroStats();toast(quetes.length+' quêtes importées depuis ZIP');}catch(err){console.error(err);toast('ZIP invalide');}
+  }e.target.value='';
+}
 
 // ── CACHES SYSTEM ──
 function renderCaches(){
@@ -824,8 +871,25 @@ function saveCache(){
   saveCachesStorage();closeCacheModal();renderCaches();
 }
 function delCache(id){caches=caches.filter(c=>c.id!==id);saveCachesStorage();renderCaches();}
-function exportCaches(){if(!caches.length){toast('Aucune cache');return;}const d={caches};const b=new Blob([JSON.stringify(d,null,2)],{type:'application/json'});const u=URL.createObjectURL(b);const a=document.createElement('a');a.href=u;a.download='fos_caches_'+new Date().toISOString().slice(0,10)+'.json';a.click();}
-function importCaches(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{try{const d=JSON.parse(ev.target.result);if(d.caches){caches=d.caches;saveCachesStorage();renderCaches();toast(caches.length+' caches importées');}}catch{toast('Fichier invalide');}e.target.value='';};r.readAsText(f);}
+async function exportCaches(){
+  if(!caches.length){toast('Aucune cache');return;}
+  _imgCounter=0;
+  const zip=new JSZip();const imgF=zip.folder('images');
+  const clean=caches.map(c=>{const x={...c};if(isB64(x.img)){const n=nextImgName('cache','jpg');imgF.file(n,b64ToUint8(x.img));x.img='images/'+n;}return x;});
+  zip.file('caches.json',JSON.stringify({caches:clean},null,2));
+  const blob=await zip.generateAsync({type:'blob'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='fos_caches_'+new Date().toISOString().slice(0,10)+'.zip';a.click();
+  toast('Export ZIP — '+caches.length+' caches');
+}
+async function importCaches(e){
+  const f=e.target.files[0];if(!f)return;
+  if(f.name.endsWith('.json')){const r=new FileReader();r.onload=ev=>{try{const d=JSON.parse(ev.target.result);if(d.caches){caches=d.caches;saveCachesStorage();renderCaches();toast(caches.length+' caches importées');}}catch{toast('Fichier invalide');}};r.readAsText(f);
+  }else{
+    try{const zip=await JSZip.loadAsync(f);const json=await zip.file('caches.json').async('string');const d=JSON.parse(json);
+    for(let c of d.caches){if(c.img&&!isB64(c.img)&&zip.file(c.img)){const ab=await zip.file(c.img).async('base64');c.img='data:image/jpeg;base64,'+ab;}}
+    caches=d.caches;saveCachesStorage();renderCaches();toast(caches.length+' caches importées depuis ZIP');}catch{toast('ZIP invalide');}
+  }e.target.value='';
+}
 
 init();
 </script>
