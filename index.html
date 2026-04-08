@@ -738,7 +738,22 @@ function initQuetes(){
   const qvs=document.getElementById('qVendeur');qvs.innerHTML='';vendors.forEach(v=>{qvs.innerHTML+=`<option value="${v}">${v}</option>`;});
   renderQuetes();
 }
-function toggleQFilter(t){qFilters[t]=!qFilters[t];document.getElementById('f-'+t).classList.toggle('on',qFilters[t]);renderQuetes();}
+function toggleQFilter(t){
+  const allOn=Object.values(qFilters).every(v=>v);
+  const onlyThisOn=qFilters[t]&&Object.keys(qFilters).filter(k=>qFilters[k]).length===1;
+  if(allOn){
+    // All visible → show only this type
+    Object.keys(qFilters).forEach(k=>qFilters[k]=false);qFilters[t]=true;
+  }else if(onlyThisOn){
+    // Only this one active → show all
+    Object.keys(qFilters).forEach(k=>qFilters[k]=true);
+  }else{
+    // Mixed → toggle this one
+    qFilters[t]=!qFilters[t];
+  }
+  Object.keys(qFilters).forEach(k=>document.getElementById('f-'+k).classList.toggle('on',qFilters[k]));
+  renderQuetes();
+}
 function typeLabel(t){return t==='principale'?'Tâche Principale':t==='secondaire'?'Tâche Secondaire':t==='contrat'?'Contrat':'Déblocage Arme/Skin';}
 function typePillClass(t){return t==='principale'?'pill-principale':t==='secondaire'?'pill-secondaire':t==='contrat'?'pill-contrat':'pill-deblocage';}
 
