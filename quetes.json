@@ -1,5 +1,5 @@
 {
-  "version": "2026-04-06 21:10",
+  "version": "2026-04-08 08:23",
   "quetes": [
     {
       "id": "1775157632374_a298ft1e32",
@@ -140,7 +140,7 @@
           "imgs": [
             {
               "src": "images/step_16.jpg",
-              "coords": "171/166",
+              "coords": "",
               "desc": ""
             },
             {
@@ -150,7 +150,7 @@
             },
             {
               "src": "images/step_18.jpg",
-              "coords": "",
+              "coords": "171/166",
               "desc": ""
             },
             {
@@ -178,17 +178,17 @@
             {
               "src": "images/step_21.jpg",
               "coords": "",
-              "desc": "porte de gauche dans le bureau"
+              "desc": "Monter au 3ème étage et trouver le bureau avec les ordinateur"
             },
             {
               "src": "images/step_22.jpg",
-              "coords": "171/166",
-              "desc": "prendre le dossier"
+              "coords": "",
+              "desc": "porte de gauche dans le bureau"
             },
             {
               "src": "images/step_23.jpg",
-              "coords": "",
-              "desc": "Monter au 3ème étage et trouver le bureau avec les ordinateur"
+              "coords": "171/166",
+              "desc": "prendre le dossier"
             }
           ]
         },

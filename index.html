@@ -136,7 +136,11 @@ select.ctrl option{background:#14171c}
 .quete-card-reward{font-family:'Share Tech Mono',monospace;font-size:12px;color:#c9a84c88}
 .quete-card-imgs{font-size:10px;color:#3a3830;letter-spacing:1px}
 .quete-card-actions{display:flex;gap:6px}
-.quete-act-btn{background:transparent;border:none;font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;padding:3px 6px;transition:color 0.1s}
+.quete-act-btn{background:transparent;border:1px solid transparent;font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;padding:4px 10px;transition:all 0.15s;border-radius:2px}
+.quete-act-btn.edit{color:#c9a84c88;border-color:#c9a84c22}
+.quete-act-btn.edit:hover{color:#c9a84c;border-color:#c9a84c55;background:#c9a84c11}
+.quete-act-btn.del{color:#4a3030;border-color:#4a303022}
+.quete-act-btn.del:hover{color:#c94c4c;border-color:#c94c4c55;background:#c94c4c11}
 
 .quete-detail-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:300;overflow-y:auto}
 .quete-detail-bg.open{display:block}
@@ -282,9 +286,7 @@ select.ctrl option{background:#14171c}
 .row.universal:hover{box-shadow:inset 3px 0 0 #c9a84c88}
 .quete-card.completed{opacity:0.45;filter:grayscale(0.4)}
 .quete-card.completed .quete-card-title{text-decoration:line-through;text-decoration-color:#c9a84c55}
-.quete-done-btn{background:transparent;border:1px solid #c9a84c22;color:#2a2820;font-size:10px;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:3px 8px;cursor:pointer;transition:all 0.15s}
-.quete-done-btn:hover{border-color:#5a8a5a;color:#5a8a5a}
-.quete-done-btn.done{border-color:#5a8a5a55;color:#5a8a5a;background:#5a8a5a11}
+
 .hl{background:#c9a84c33;color:#e8d89a;border-radius:2px;padding:0 1px}
 .confirm-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:600;align-items:center;justify-content:center}
 .confirm-overlay.open{display:flex}
@@ -632,6 +634,11 @@ function goPage(p){
 function toggleNav(){document.getElementById('navLinks').classList.toggle('open');}
 
 function init(){
+  // Vider le cache local pour toujours charger les données fraîches du repo
+  localStorage.removeItem('fos_items');
+  localStorage.removeItem('fos_quetes');
+  localStorage.removeItem('fos_caches');
+  items=[];quetes=[];caches=[];
   document.getElementById('navLogo').src=FOS_IMG;
   buildVendorBar();
   const fsel=document.getElementById('vendorFilter');
@@ -749,10 +756,9 @@ function renderQuetes(){
     <div class="quete-card-header" style="padding-top:${qt.cover?'10px':'0'}"><div class="quete-card-title">${highlight(qt.nom,q)}</div><span class="quete-type-pill ${typePillClass(qt.type)}">${typeLabel(qt.type)}</span></div>
     <div class="quete-card-vendor">${qt.vendeur}</div><div class="quete-card-desc">${qt.desc?highlight(qt.desc,q):'—'}</div>
     <div class="quete-card-footer"><span class="quete-card-reward">${qt.reward?'🎁 '+qt.reward:''}</span><span class="quete-card-imgs">${(qt.etapes||[]).length} étape${(qt.etapes||[]).length!==1?'s':''} · ${tImgs(qt)} img</span>
-    <div class="quete-card-actions" onclick="event.stopPropagation()"><button class="quete-done-btn${qt.completed?' done':''}" onclick="toggleQComplete('${qt.id}')">${qt.completed?'✓ Terminée':'○ Terminée'}</button><button class="quete-act-btn" style="color:#c9a84c77" onclick="openQModal('${qt.id}')">✏</button><button class="quete-act-btn" style="color:#3a3030" onclick="confirmAction(()=>delQuete('${qt.id}'),'Supprimer <b>${qt.nom.replace(/'/g,"&#39;")}</b> ?')">✕</button></div></div>
+    <div class="quete-card-actions" onclick="event.stopPropagation()"><button class="quete-act-btn edit" onclick="openQModal('${qt.id}')">✏ Modifier</button><button class="quete-act-btn del" onclick="confirmAction(()=>delQuete('${qt.id}'),'Supprimer <b>${qt.nom.replace(/'/g,"&#39;")}</b> ?')">✕ Supprimer</button></div></div>
     ${(qt.etapes||[]).length?`<div class="quete-progress"><div class="quete-progress-fill" style="width:${qt.completed?100:0}%"></div></div>`:''}</div>`).join('');
 }
-function toggleQComplete(id){const qt=quetes.find(q=>q.id===id);if(!qt)return;qt.completed=!qt.completed;saveQuetesStorage();renderQuetes();}
 function openQDetail(id){
   const qt=quetes.find(q=>q.id===id);if(!qt)return;const etapes=qt.etapes||[];
   document.getElementById('queteDetail').innerHTML=`<button class="quete-detail-close" onclick="document.getElementById('queteDetailBg').classList.remove('open')">✕</button>
