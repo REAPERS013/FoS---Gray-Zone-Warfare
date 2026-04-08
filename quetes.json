@@ -1,5 +1,5 @@
 {
-  "version": "2026-04-08 08:29",
+  "version": "2026-04-08 08:39",
   "quetes": [
     {
       "id": "1775157632374_a298ft1e32",
@@ -120,7 +120,7 @@
       "etapes": [
         {
           "titre": "Trouver le PC",
-          "desc": "",
+          "desc": "Villa de Luisa",
           "imgs": [
             {
               "src": "images/step_14.jpg",
@@ -136,27 +136,27 @@
         },
         {
           "titre": "Trouver la clé usb",
-          "desc": "",
+          "desc": "Dans l'hôtel",
           "imgs": [
             {
               "src": "images/step_16.jpg",
-              "coords": "",
-              "desc": ""
+              "coords": "171/166",
+              "desc": "Trouver l'accueil et passer la porte de gauche"
             },
             {
               "src": "images/step_17.jpg",
               "coords": "171/166",
-              "desc": ""
+              "desc": "Prendre la porte de gauche après l'accueil"
             },
             {
               "src": "images/step_18.jpg",
-              "coords": "",
-              "desc": ""
+              "coords": "171/166",
+              "desc": "Regarder sur le bureau"
             },
             {
               "src": "images/step_19.jpg",
-              "coords": "",
-              "desc": ""
+              "coords": "171/166",
+              "desc": "Prendre la clé"
             }
           ]
         },
@@ -166,8 +166,8 @@
           "imgs": [
             {
               "src": "images/step_20.jpg",
-              "coords": "",
-              "desc": ""
+              "coords": "172/169",
+              "desc": "Utiliser la clé dans le PC"
             }
           ]
         },
@@ -177,38 +177,38 @@
           "imgs": [
             {
               "src": "images/step_21.jpg",
-              "coords": "",
+              "coords": "171/166",
               "desc": "Monter au 3ème étage et trouver le bureau avec les ordinateur"
             },
             {
               "src": "images/step_22.jpg",
-              "coords": "",
-              "desc": "porte de gauche dans le bureau"
+              "coords": "171/166",
+              "desc": "Porte de gauche dans le bureau"
             },
             {
               "src": "images/step_23.jpg",
               "coords": "171/166",
-              "desc": "prendre le dossier"
+              "desc": " Prendre le dossier"
             }
           ]
         },
         {
-          "titre": "",
-          "desc": "2eme info",
+          "titre": "2eme info",
+          "desc": "",
           "imgs": [
             {
               "src": "images/step_24.jpg",
-              "coords": "",
+              "coords": "171/167",
               "desc": "Partir a droite du bureau"
             },
             {
               "src": "images/step_25.jpg",
-              "coords": "",
+              "coords": "171/167",
               "desc": "Prendre la 1er chambre à droite après les doubles portes"
             },
             {
               "src": "images/step_26.jpg",
-              "coords": "",
+              "coords": "171/167",
               "desc": "Sur la table prendre la note"
             },
             {
