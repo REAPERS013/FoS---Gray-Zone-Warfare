@@ -1,5 +1,5 @@
 {
-  "version": "2026-04-08 16:05",
+  "version": "2026-04-08 19:52",
   "quetes": [
     {
       "id": "1775157632374_a298ft1e32",
@@ -427,6 +427,123 @@
           "titre": "Fin de la quest",
           "desc": "Pour terminer la quest vous devez vous rendre a un camp et donner les documents a gunny",
           "imgs": []
+        }
+      ]
+    },
+    {
+      "id": "1775676776930_2y1g22lckav",
+      "nom": "Jeux Dangereux",
+      "type": "principale",
+      "vendeur": "LAB RAT",
+      "desc": "Retrouvez Auii Syvongsa",
+      "reward": "500 Rép / 600 XP / 2 820 $ / 2 items",
+      "cover": "images/cover_57.jpg",
+      "etapes": [
+        {
+          "titre": "Trouver le cadavre",
+          "desc": "",
+          "imgs": [
+            {
+              "src": "images/step_58.jpg",
+              "coords": "159/168",
+              "desc": "Trouver l'homme attaché"
+            }
+          ]
+        },
+        {
+          "titre": "Trouver une preuve de l'identité",
+          "desc": "Fouiller le cadavre",
+          "imgs": [
+            {
+              "src": "images/step_59.jpg",
+              "coords": "159/168",
+              "desc": "Prendre la lettre"
+            }
+          ]
+        },
+        {
+          "titre": "Trouver des échantillons biologiques",
+          "desc": "Direction au Sud du couloirs de tir",
+          "imgs": [
+            {
+              "src": "images/step_60.jpg",
+              "coords": "159/168",
+              "desc": "Aller au restaurant "
+            },
+            {
+              "src": "images/step_61.jpg",
+              "coords": "159/168",
+              "desc": "Aller au fond de la cuisine"
+            },
+            {
+              "src": "images/step_62.jpg",
+              "coords": "159/168",
+              "desc": "Prendre les échantillons"
+            }
+          ]
+        },
+        {
+          "titre": "Trouvez des renseignements sur les VIP",
+          "desc": "Direction à l'Est du couloir de tir",
+          "imgs": [
+            {
+              "src": "images/step_63.jpg",
+              "coords": "160/168",
+              "desc": "Aller dans la maison"
+            },
+            {
+              "src": "images/step_64.jpg",
+              "coords": "160/168",
+              "desc": "Lire le programme dans la salle de repos"
+            }
+          ]
+        },
+        {
+          "titre": "Découvrir la véritable nature de la section VIP",
+          "desc": "Trouver le code du bunker et l'ouvrir",
+          "imgs": [
+            {
+              "src": "images/step_65.jpg",
+              "coords": "159/168",
+              "desc": "Aller dans la pièce du boucher proche du 1er cadavre"
+            },
+            {
+              "src": "images/step_66.jpg",
+              "coords": "159/168",
+              "desc": "Lire le post-it vert sur le mur proche du bureau"
+            },
+            {
+              "src": "images/step_67.jpg",
+              "coords": "",
+              "desc": "Code (propable dynamique) : 9076"
+            },
+            {
+              "src": "images/step_68.jpg",
+              "coords": "158/169",
+              "desc": "Direction le Bunker une fois le code récupérer"
+            },
+            {
+              "src": "images/step_69.jpg",
+              "coords": "158/169",
+              "desc": "Trouver le bunker dans la forêt "
+            },
+            {
+              "src": "images/step_70.jpg",
+              "coords": "158/170",
+              "desc": "Aller dans les toilettes au fond a droite du bunker"
+            }
+          ]
+        },
+        {
+          "titre": "Rendre les objets de quêtes",
+          "desc": "",
+          "imgs": [
+            {
+              "src": "images/step_71.jpg",
+              "coords": "",
+              "desc": "Rendre la lettre et les échantillons"
+            }
+          ]
         }
       ]
     }
