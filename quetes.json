@@ -1,5 +1,5 @@
 {
-  "version": "2026-04-08 08:39",
+  "version": "2026-04-08 15:54",
   "quetes": [
     {
       "id": "1775157632374_a298ft1e32",
@@ -322,6 +322,111 @@
               "desc": "Lire la note et rendre la quete"
             }
           ]
+        }
+      ]
+    },
+    {
+      "id": "1775661138223_a2ngpssqw3d",
+      "nom": "Pistolets et munitions",
+      "type": "principale",
+      "vendeur": "HANDSHAKE",
+      "desc": "Découvrez ce qui est arrivé sur la route menant au Hunter's Paradis",
+      "reward": "500 repu (gunny) + 600 exp + 2820 usd + 4 items",
+      "cover": "images/cover_43.jpg",
+      "etapes": [
+        {
+          "titre": "Trouver la boite sur la route",
+          "desc": "Dirigez-vous sur la route pour trouver la caisse verte dans le camion ",
+          "imgs": [
+            {
+              "src": "images/step_44.jpg",
+              "coords": "159-166",
+              "desc": "Caisse verte à l'arrière du camion"
+            },
+            {
+              "src": "images/step_45.jpg",
+              "coords": "159-166",
+              "desc": "Sur la route derrière le camion pour ce diriger a Hunter's Paradis"
+            }
+          ]
+        },
+        {
+          "titre": "Déplacez-vous au trois (3) endroit diffèrent",
+          "desc": "Première place a vous déplacer est la décharge\n\nDeuxième place a vous déplacer est au motel\n\nTroisième place a vous déplacer est au point de repos",
+          "imgs": [
+            {
+              "src": "images/step_46.jpg",
+              "coords": "159-167",
+              "desc": "vous devez simplement vous rendre a l'endroit"
+            },
+            {
+              "src": "images/step_47.jpg",
+              "coords": "160-167",
+              "desc": "vous devez simplement vous rendre a l'endroit"
+            },
+            {
+              "src": "images/step_48.jpg",
+              "coords": "161-168",
+              "desc": "vous devez simplement vous rendre a l'endroit"
+            }
+          ]
+        },
+        {
+          "titre": "déplacez-vous dans l'armurerie de Hunter's Paradis",
+          "desc": "Déplacez-vous dans l'entrepôt pour trouver la porte de la réserve d'armes et ouvrir avec la clé trouve sur un PNJ",
+          "imgs": [
+            {
+              "src": "images/step_49.jpg",
+              "coords": "",
+              "desc": "clé de réserve d'armes"
+            },
+            {
+              "src": "images/step_50.jpg",
+              "coords": "159-168",
+              "desc": "porte de la réserve d'armes"
+            },
+            {
+              "src": "images/step_51.jpg",
+              "coords": "159-168",
+              "desc": " l'armurerie de Hunter's Paradis"
+            },
+            {
+              "src": "images/step_52.jpg",
+              "coords": "159-168",
+              "desc": "la caisse est a droite de la porte"
+            }
+          ]
+        },
+        {
+          "titre": " deux (2) document",
+          "desc": "vous devez chercher deux (2) document \n\n-Premier document est au motel sur une table de pinique\n\n-Deuxième document est au poste de contrôle",
+          "imgs": [
+            {
+              "src": "images/step_53.jpg",
+              "coords": "161-167",
+              "desc": "document sur la table de pinic"
+            },
+            {
+              "src": "images/step_54.jpg",
+              "coords": "161-167",
+              "desc": "motel"
+            },
+            {
+              "src": "images/step_55.jpg",
+              "coords": "160-168",
+              "desc": "document sur la table a droite"
+            },
+            {
+              "src": "images/step_56.jpg",
+              "coords": "160-168",
+              "desc": "Guerrite"
+            }
+          ]
+        },
+        {
+          "titre": "Fin de la quest",
+          "desc": "Pour terminer la quest vous devez vous rendre a un camp et donner les documents a gunny",
+          "imgs": []
         }
       ]
     }
