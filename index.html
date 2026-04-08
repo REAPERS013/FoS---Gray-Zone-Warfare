@@ -523,7 +523,8 @@ select.ctrl option{background:#14171c}
     <div class="field"><label>Notes</label><textarea id="codeNotes" rows="2" placeholder="Infos supplémentaires..."></textarea></div>
     <div class="field">
       <label>Image</label>
-      <div id="codeImgPreview" class="img-drop" onclick="document.getElementById('codeImgFile').click()"><div style="text-align:center"><div class="img-hint">Cliquer pour importer</div></div></div>
+      <div id="codeImgsContainer" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px"></div>
+      <div class="img-drop" onclick="document.getElementById('codeImgFile').click()" style="cursor:pointer"><div style="text-align:center"><div class="img-hint">+ Ajouter une image</div></div></div>
       <input type="file" id="codeImgFile" accept="image/*" style="display:none" onchange="loadCodeImg(event)"/>
     </div>
     <div class="modal-actions">
@@ -610,9 +611,10 @@ select.ctrl option{background:#14171c}
     <div class="field"><label>Coordonnées</label><input type="text" id="cacheCoords" placeholder="Ex: X:7200 Y:3800"/></div>
     <div class="field"><label>Notes</label><textarea id="cacheNotes" placeholder="Détails supplémentaires..." style="min-height:60px"></textarea></div>
     <div class="field">
-      <label>Image (optionnel)</label>
-      <div class="img-preview" id="cacheImgPreview" onclick="document.getElementById('cacheImgFile').click()">
-        <div style="text-align:center"><div class="img-hint">Cliquer pour importer</div></div>
+      <label>Images</label>
+      <div id="cacheImgsContainer" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px"></div>
+      <div class="img-drop" onclick="document.getElementById('cacheImgFile').click()" style="cursor:pointer">
+        <div style="text-align:center"><div class="img-hint">+ Ajouter une image</div></div>
       </div>
       <input type="file" id="cacheImgFile" accept="image/*" style="display:none" onchange="loadCacheImg(event)"/>
     </div>
@@ -686,7 +688,7 @@ const qFilters={principale:true,secondaire:true,contrat:true,deblocage:true};
 // ── CACHES ──
 let caches=[];
 let pendingCacheEdit=null;
-let pendingCacheImg=null;
+let pendingCacheImgs=[];
 
 // ── CARTE ──
 
@@ -993,8 +995,8 @@ function renderCaches(){
   const grid=document.getElementById('caches-grid');const empty=document.getElementById('caches-empty');
   if(!filtered.length){grid.innerHTML='';empty.style.display='block';return;}
   empty.style.display='none';
-  grid.innerHTML=filtered.map(c=>`<div class="cache-card">
-    ${c.img?`<img src="${c.img}" class="cache-card-img" onclick="openLightbox('${c.img}')"/>`:''}
+  grid.innerHTML=filtered.map(c=>{const imgs=c.imgs||(c.img?[c.img]:[]);return `<div class="cache-card">
+    ${imgs.length?`<div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px">${imgs.map(src=>`<img src="${src}" class="cache-card-img" style="width:${imgs.length>1?'calc(50% - 2px)':'100%'};height:140px" onclick="openLightbox('${src}')"/>`).join('')}</div>`:''}
     ${c.zone?`<div style="margin-bottom:6px"><span class="code-zone-tag">${c.zone}</span></div>`:''}
     <div class="cache-card-name">${highlight(c.nom,q)}</div>
     ${c.coords?`<div class="cache-card-coords">📍 ${highlight(c.coords,q)}</div>`:''}
@@ -1002,24 +1004,29 @@ function renderCaches(){
     <div class="cache-actions">
       <button class="del-btn" style="color:#c9a84c77;font-size:11px" onclick="openCacheModal('${c.id}')">✏ Modifier</button>
       <button class="del-btn" onclick="confirmAction(()=>delCache('${c.id}'),'Supprimer cette cache ?')">✕ Suppr.</button>
-    </div></div>`).join('');
+    </div></div>`}).join('');
 }
 function openCacheModal(editId=null){
-  pendingCacheEdit=editId;pendingCacheImg=null;
+  pendingCacheEdit=editId;pendingCacheImgs=[];
   const c=editId?caches.find(x=>x.id===editId):null;
   document.getElementById('cacheNom').value=c?c.nom:'';document.getElementById('cacheCoords').value=c?c.coords:'';document.getElementById('cacheNotes').value=c?c.notes:'';
   document.getElementById('cacheZone').value=c&&c.zone?c.zone:'';
   document.getElementById('cacheModalTitle').textContent=editId?'Modifier la cache':'Ajouter une cache';
-  if(c&&c.img){pendingCacheImg=c.img;document.getElementById('cacheImgPreview').innerHTML=`<img src="${c.img}"/>`;}else document.getElementById('cacheImgPreview').innerHTML='<div style="text-align:center"><div class="img-hint">Cliquer pour importer</div></div>';
+  if(c){pendingCacheImgs=c.imgs?[...c.imgs]:(c.img?[c.img]:[]);}
+  renderCacheImgPreviews();
   document.getElementById('cacheImgFile').value='';document.getElementById('cacheModalBg').classList.add('open');
+}
+function renderCacheImgPreviews(){
+  const cont=document.getElementById('cacheImgsContainer');
+  cont.innerHTML=pendingCacheImgs.map((src,i)=>`<div style="position:relative;width:100px;height:80px;border:1px solid #1e2228;overflow:hidden"><img src="${src}" style="width:100%;height:100%;object-fit:cover"/><button onclick="pendingCacheImgs.splice(${i},1);renderCacheImgPreviews()" style="position:absolute;top:2px;right:2px;background:#0a0c0e99;border:none;color:#c94c4c;cursor:pointer;font-size:14px;padding:0 4px">✕</button></div>`).join('');
 }
 function closeCacheModal(){document.getElementById('cacheModalBg').classList.remove('open');pendingCacheEdit=null;}
 document.getElementById('cacheModalBg').addEventListener('click',function(e){if(e.target===this)closeCacheModal();});
-function loadCacheImg(e){const f=e.target.files[0];if(!f)return;compressImage(f,800,600,0.6).then(d=>{pendingCacheImg=d;document.getElementById('cacheImgPreview').innerHTML=`<img src="${d}"/>`;});}
+function loadCacheImg(e){const f=e.target.files[0];if(!f)return;compressImage(f,800,600,0.6).then(d=>{pendingCacheImgs.push(d);renderCacheImgPreviews();});e.target.value='';}
 function saveCache(){
   const nom=document.getElementById('cacheNom').value.trim();if(!nom)return;
-  const c={id:pendingCacheEdit||(Date.now()+'_'+Math.random().toString(36).slice(2)),nom,zone:document.getElementById('cacheZone').value,coords:document.getElementById('cacheCoords').value.trim(),notes:document.getElementById('cacheNotes').value.trim(),img:pendingCacheImg||null};
-  if(pendingCacheEdit){const i=caches.findIndex(x=>x.id===pendingCacheEdit);if(i>-1){c.img=pendingCacheImg||caches[i].img;caches[i]=c;}toast('Cache modifiée');}else{caches.push(c);toast('Cache ajoutée');}
+  const c={id:pendingCacheEdit||(Date.now()+'_'+Math.random().toString(36).slice(2)),nom,zone:document.getElementById('cacheZone').value,coords:document.getElementById('cacheCoords').value.trim(),notes:document.getElementById('cacheNotes').value.trim(),imgs:pendingCacheImgs.length?[...pendingCacheImgs]:[]};
+  if(pendingCacheEdit){const i=caches.findIndex(x=>x.id===pendingCacheEdit);if(i>-1){caches[i]=c;}toast('Cache modifiée');}else{caches.push(c);toast('Cache ajoutée');}
   saveCachesStorage();closeCacheModal();renderCaches();
 }
 function delCache(id){caches=caches.filter(c=>c.id!==id);saveCachesStorage();renderCaches();}
@@ -1039,7 +1046,7 @@ function importCaches(e){
 const MAP_ZONES=['Kiu Vongsa','Hunter\'s Paradise','Scierie','YBL-1','Aérodrome de Phalang','Lagon Bleu','Ban PA','Midnight Sapphire','Fort Narith','Tiger Bay'];
 let codes=[];
 let pendingCodeEdit=null;
-let pendingCodeImg=null;
+let pendingCodeImgs=[];
 
 function saveCodesStorage(){try{localStorage.setItem('fos_codes',JSON.stringify(codes));}catch(e){}}
 async function autoLoadCodes(){
@@ -1069,7 +1076,7 @@ function renderCodes(){
   if(!filtered.length){grid.innerHTML='';empty.style.display='block';return;}
   empty.style.display='none';
   grid.innerHTML=filtered.map(c=>`<div class="cache-card">
-    ${c.img?`<img src="${c.img}" class="cache-card-img" onclick="openLightbox('${c.img}')"/>`:''} 
+    ${(()=>{const imgs=c.imgs||(c.img?[c.img]:[]);return imgs.length?`<div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px">${imgs.map(src=>`<img src="${src}" class="cache-card-img" style="width:${imgs.length>1?'calc(50% - 2px)':'100%'};height:140px" onclick="openLightbox('${src}')"/>`).join('')}</div>`:'';})()}
     <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-bottom:6px"><span class="code-zone-tag">${c.zone}</span><span class="code-type ${c.type}">${c.type==='fixe'?'🔒 Fixe':'🔄 Dynamique'}</span></div>
     <div class="cache-card-name">${highlight(c.nom,q)}</div>
     ${c.valeur?`<div class="code-valeur">${highlight(c.valeur,q)}</div>`:''}
@@ -1082,7 +1089,7 @@ function renderCodes(){
     </div></div>`).join('');
 }
 function openCodeModal(editId=null){
-  pendingCodeEdit=editId;pendingCodeImg=null;
+  pendingCodeEdit=editId;pendingCodeImgs=[];
   const c=editId?codes.find(x=>x.id===editId):null;
   document.getElementById('codeNom').value=c?c.nom:'';
   document.getElementById('codeValeur').value=c?c.valeur||'':'';
@@ -1092,13 +1099,17 @@ function openCodeModal(editId=null){
   document.getElementById('codeModalTitle').textContent=editId?'Modifier le code':'Ajouter un code';
   if(c){document.getElementById('codeZone').value=c.zone||MAP_ZONES[0];document.getElementById('codeType').value=c.type||'fixe';}
   else{document.getElementById('codeZone').value=MAP_ZONES[0];document.getElementById('codeType').value='fixe';}
-  if(c&&c.img){pendingCodeImg=c.img;document.getElementById('codeImgPreview').innerHTML=`<img src="${c.img}"/>`;}
-  else document.getElementById('codeImgPreview').innerHTML='<div style="text-align:center"><div class="img-hint">Cliquer pour importer</div></div>';
+  if(c){pendingCodeImgs=c.imgs?[...c.imgs]:(c.img?[c.img]:[]);}
+  renderCodeImgPreviews();
   document.getElementById('codeImgFile').value='';document.getElementById('codeModalBg').classList.add('open');
 }
 function closeCodeModal(){document.getElementById('codeModalBg').classList.remove('open');pendingCodeEdit=null;}
 document.getElementById('codeModalBg').addEventListener('click',function(e){if(e.target===this)closeCodeModal();});
-function loadCodeImg(e){const f=e.target.files[0];if(!f)return;compressImage(f,800,600,0.6).then(d=>{pendingCodeImg=d;document.getElementById('codeImgPreview').innerHTML=`<img src="${d}"/>`;});}
+function renderCodeImgPreviews(){
+  const cont=document.getElementById('codeImgsContainer');
+  cont.innerHTML=pendingCodeImgs.map((src,i)=>`<div style="position:relative;width:100px;height:80px;border:1px solid #1e2228;overflow:hidden"><img src="${src}" style="width:100%;height:100%;object-fit:cover"/><button onclick="pendingCodeImgs.splice(${i},1);renderCodeImgPreviews()" style="position:absolute;top:2px;right:2px;background:#0a0c0e99;border:none;color:#c94c4c;cursor:pointer;font-size:14px;padding:0 4px">✕</button></div>`).join('');
+}
+function loadCodeImg(e){const f=e.target.files[0];if(!f)return;compressImage(f,800,600,0.6).then(d=>{pendingCodeImgs.push(d);renderCodeImgPreviews();});e.target.value='';}
 function saveCode(){
   const nom=document.getElementById('codeNom').value.trim();if(!nom)return;
   const zone=document.getElementById('codeZone').value;
@@ -1108,8 +1119,8 @@ function saveCode(){
     emplacement:document.getElementById('codeEmplacement').value.trim(),
     coords:document.getElementById('codeCoords').value.trim(),
     notes:document.getElementById('codeNotes').value.trim(),
-    img:pendingCodeImg||null};
-  if(pendingCodeEdit){const i=codes.findIndex(x=>x.id===pendingCodeEdit);if(i>-1){c.img=pendingCodeImg||codes[i].img;codes[i]=c;}toast('Code modifié');}
+    img:null,imgs:pendingCodeImgs.length?[...pendingCodeImgs]:[]};
+  if(pendingCodeEdit){const i=codes.findIndex(x=>x.id===pendingCodeEdit);if(i>-1){codes[i]=c;}toast('Code modifié');}
   else{codes.push(c);toast('Code ajouté');}
   saveCodesStorage();closeCodeModal();renderCodes();
 }
