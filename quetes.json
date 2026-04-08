@@ -1,5 +1,5 @@
 {
-  "version": "2026-04-08 19:52",
+  "version": "2026-04-08 20:43",
   "quetes": [
     {
       "id": "1775157632374_a298ft1e32",
@@ -542,6 +542,60 @@
               "src": "images/step_71.jpg",
               "coords": "",
               "desc": "Rendre la lettre et les échantillons"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1775680091240_8l61ye0f9f6",
+      "nom": "Caméléon - SIG MCX (GN)",
+      "type": "deblocage",
+      "vendeur": "BANSHEE",
+      "desc": "Trouver le magazine dans Mignight Sapphire et livrez le",
+      "reward": "Débloquage Arme",
+      "cover": "images/cover_72.jpg",
+      "etapes": [
+        {
+          "titre": "Trouver le livre",
+          "desc": "",
+          "imgs": [
+            {
+              "src": "images/step_73.jpg",
+              "coords": "171/166",
+              "desc": "Aller a gauche de l'entrée de l'hôtel"
+            },
+            {
+              "src": "images/step_74.jpg",
+              "coords": "171/166",
+              "desc": "Prendre le magazine sur la table"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1775680474593_onuwlovrixo",
+      "nom": "Caméléon - M700 (GC)",
+      "type": "deblocage",
+      "vendeur": "BANSHEE",
+      "desc": "Trouver le magazine sur le toi de l'hôtel de Mignight Sapphire",
+      "reward": "Débloquage Arme",
+      "cover": "images/cover_75.jpg",
+      "etapes": [
+        {
+          "titre": "Aller au dernier étage de l'hôtel",
+          "desc": "Face NE aller sur le coter droit ",
+          "imgs": [
+            {
+              "src": "images/step_76.jpg",
+              "coords": "171/166",
+              "desc": "Le magazine se trouve sur le toit de l'hotel"
+            },
+            {
+              "src": "images/step_77.jpg",
+              "coords": "171/166",
+              "desc": "Prendre le magazine et le rendre"
             }
           ]
         }
