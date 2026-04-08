@@ -400,7 +400,7 @@ select.ctrl option{background:#14171c}
     <div class="search-wrap"><span class="s-ico">&#9906;</span><input type="text" id="search" placeholder="Rechercher un objet..." oninput="renderList()"/></div>
     <select class="ctrl" id="vendorFilter" onchange="syncVendorBar();renderList()"><option value="">Tous les vendeurs</option></select>
     <div class="sort-group">
-      <button class="sort-btn active" id="sortPrix" onclick="setSortField('prix')">Prix ↑</button>
+      <button class="sort-btn active" id="sortPrix" onclick="setSortField('prix')">Prix ↓</button>
       <button class="sort-btn" id="sortNom" onclick="setSortField('nom')">Nom ↑</button>
     </div>
     <button class="btn btn-muted" onclick="document.getElementById('importFile').click()">&#8599; Importer</button>
@@ -597,7 +597,7 @@ const FOS_IMG = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAIAAAAlC
 const vendors=["HANDSHAKE","GUNNY","LAB RAT","ARTISAN","TURNCOAT","BANSHEE","VULTURE"];
 const specs={GUNNY:"Alcool / Parfum","LAB RAT":"Téléphones",ARTISAN:"Carte bancaire",TURNCOAT:"Bijoux"};
 let items=[];
-let sortDir=1;
+let sortDir=-1;
 let sortField='prix';
 let pendingImg=null;
 let pendingEdit=null;
