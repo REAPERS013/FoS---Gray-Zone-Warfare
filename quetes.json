@@ -1,5 +1,5 @@
 {
-  "version": "2026-04-08 08:23",
+  "version": "2026-04-08 08:29",
   "quetes": [
     {
       "id": "1775157632374_a298ft1e32",
@@ -145,12 +145,12 @@
             },
             {
               "src": "images/step_17.jpg",
-              "coords": "",
+              "coords": "171/166",
               "desc": ""
             },
             {
               "src": "images/step_18.jpg",
-              "coords": "171/166",
+              "coords": "",
               "desc": ""
             },
             {
