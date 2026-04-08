@@ -1,5 +1,5 @@
 {
-  "version": "2026-04-08 20:43",
+  "version": "2026-04-08 21:01",
   "quetes": [
     {
       "id": "1775157632374_a298ft1e32",
@@ -596,6 +596,70 @@
               "src": "images/step_77.jpg",
               "coords": "171/166",
               "desc": "Prendre le magazine et le rendre"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1775681838709_n4lllfy2ag",
+      "nom": "Pas de questions",
+      "type": "secondaire",
+      "vendeur": "TURNCOAT",
+      "desc": "Trouvez les cigares cubains et les lingots d'or",
+      "reward": "Rép / XP / $",
+      "cover": "images/cover_78.jpg",
+      "etapes": [
+        {
+          "titre": "Trouver les cigares",
+          "desc": "Villa Marta Monica",
+          "imgs": [
+            {
+              "src": "images/step_79.jpg",
+              "coords": "172/165",
+              "desc": "Aller à l'annexe"
+            },
+            {
+              "src": "images/step_80.jpg",
+              "coords": "172/165",
+              "desc": "Prendre les cigares"
+            }
+          ]
+        },
+        {
+          "titre": "Trouver les lingots d'or",
+          "desc": "Villa Anna Jana",
+          "imgs": [
+            {
+              "src": "images/step_81.jpg",
+              "coords": "172/165",
+              "desc": "Trouver le code du coffre"
+            },
+            {
+              "src": "images/step_82.jpg",
+              "coords": "172/165",
+              "desc": "Prendre le post-it bleu"
+            },
+            {
+              "src": "images/step_83.jpg",
+              "coords": "172/165",
+              "desc": "Lire le message depuis l'inventaire"
+            },
+            {
+              "src": "images/step_84.jpg",
+              "coords": "172/165",
+              "desc": "Déverrouiller le coffre dans la chambre"
+            }
+          ]
+        },
+        {
+          "titre": "Rendre les items",
+          "desc": "",
+          "imgs": [
+            {
+              "src": "images/step_85.jpg",
+              "coords": "",
+              "desc": ""
             }
           ]
         }
