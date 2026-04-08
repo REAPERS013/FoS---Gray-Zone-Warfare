@@ -318,6 +318,13 @@ select.ctrl option{background:#14171c}
 .membre-name{font-size:18px;font-weight:700;color:#e8e0cc;letter-spacing:1px;margin-bottom:6px}
 .membre-grade{font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:3px 12px;display:inline-block;border:1px solid #c9a84c44;color:#c9a84c88}
 
+/* ── CODE BADGES ── */
+.code-type{display:inline-block;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:2px 8px;border:1px solid}
+.code-type.fixe{color:#5a8a5a;border-color:#5a8a5a44;background:#5a8a5a11}
+.code-type.dynamique{color:#8a6a5a;border-color:#8a6a5a44;background:#8a6a5a11}
+.code-zone-tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:2px 8px;color:#5a7a8a;border:1px solid #5a7a8a44;background:#5a7a8a11;margin-right:6px}
+.code-valeur{font-family:'Share Tech Mono',monospace;font-size:18px;color:#c9a84c;letter-spacing:3px;margin:6px 0}
+
 /* ── MOBILE ── */
 .nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px}
 .nav-hamburger span{width:22px;height:2px;background:#c9a84c;transition:all 0.2s}
@@ -354,6 +361,7 @@ select.ctrl option{background:#14171c}
     <div class="nav-link" id="nav-ventes" onclick="goPage('ventes')">Ventes</div>
     <div class="nav-link" id="nav-quetes" onclick="goPage('quetes')">Quêtes</div>
     <div class="nav-link" id="nav-caches" onclick="goPage('caches')">Caches</div>
+    <div class="nav-link" id="nav-codes" onclick="goPage('codes')">Codes</div>
     <div class="nav-link" id="nav-membres" onclick="goPage('membres')">Membres</div>
     <div class="nav-link" id="nav-carte" onclick="goPage('carte')">Carte</div>
   </div>
@@ -452,6 +460,9 @@ select.ctrl option{background:#14171c}
       <div class="caches-subtitle">Emplacements repérés sur la carte</div>
     </div>
     <div class="caches-controls">
+      <select class="ctrl" id="cachesZoneFilter" onchange="renderCaches()" style="min-width:160px">
+        <option value="">Toutes les zones</option>
+      </select>
       <div class="search-wrap" style="flex:1;min-width:180px"><span class="s-ico">&#9906;</span><input type="text" id="cachesSearch" placeholder="Rechercher une cache..." oninput="renderCaches()" style="width:100%;background:#0f1216;border:1px solid #c9a84c33;color:#e8e0cc;padding:7px 12px 7px 34px;font-family:'Rajdhani',sans-serif;font-size:14px;outline:none"/></div>
       <button class="btn btn-muted" onclick="document.getElementById('importCachesFile').click()">&#8599; Importer</button>
       <input type="file" id="importCachesFile" accept=".json" style="display:none" onchange="importCaches(event)"/>
@@ -460,6 +471,65 @@ select.ctrl option{background:#14171c}
     </div>
     <div class="caches-grid" id="caches-grid"></div>
     <div class="caches-empty" id="caches-empty">Aucune cache répertoriée<br><span style="color:#c9a84c;cursor:pointer" onclick="openCacheModal()">+ Ajouter une cache</span></div>
+  </div>
+</div>
+
+<!-- PAGE CODES -->
+<div class="page" id="page-codes">
+  <div class="caches-page">
+    <div class="caches-header">
+      <div class="caches-title">Codes Bâtiments & Coffres</div>
+      <div class="caches-subtitle">Codes d'accès par zone</div>
+    </div>
+    <div class="caches-controls">
+      <select class="ctrl" id="codesZoneFilter" onchange="renderCodes()" style="min-width:160px">
+        <option value="">Toutes les zones</option>
+      </select>
+      <select class="ctrl" id="codesTypeFilter" onchange="renderCodes()">
+        <option value="">Tous les types</option>
+        <option value="fixe">Code fixe</option>
+        <option value="dynamique">Code dynamique</option>
+      </select>
+      <div class="search-wrap" style="flex:1;min-width:150px"><span class="s-ico">&#9906;</span><input type="text" id="codesSearch" placeholder="Rechercher..." oninput="renderCodes()" style="width:100%;background:#0f1216;border:1px solid #c9a84c33;color:#e8e0cc;padding:7px 12px 7px 34px;font-family:'Rajdhani',sans-serif;font-size:14px;outline:none"/></div>
+      <button class="btn btn-muted" onclick="document.getElementById('importCodesFile').click()">&#8599; Importer</button>
+      <input type="file" id="importCodesFile" accept=".json" style="display:none" onchange="importCodes(event)"/>
+      <button class="btn btn-ghost" onclick="exportCodes()">&#8600; Exporter</button>
+      <button class="btn btn-gold" onclick="openCodeModal()">+ Ajouter</button>
+    </div>
+    <div class="caches-grid" id="codes-grid"></div>
+    <div class="caches-empty" id="codes-empty">Aucun code répertorié<br><span style="color:#c9a84c;cursor:pointer" onclick="openCodeModal()">+ Ajouter un code</span></div>
+  </div>
+</div>
+
+<!-- MODAL CODE -->
+<div class="modal-bg" id="codeModalBg">
+  <div class="modal">
+    <div class="modal-title" id="codeModalTitle">Ajouter un code</div>
+    <div class="field"><label>Nom du lieu *</label><input type="text" id="codeNom" placeholder="Ex: Coffre-fort Hôtel Central"/></div>
+    <div class="field">
+      <label>Zone *</label>
+      <select id="codeZone"></select>
+    </div>
+    <div class="field">
+      <label>Type de code *</label>
+      <select id="codeType">
+        <option value="fixe">Code fixe</option>
+        <option value="dynamique">Code dynamique</option>
+      </select>
+    </div>
+    <div class="field"><label>Code (si fixe)</label><input type="text" id="codeValeur" placeholder="Ex: 1234"/></div>
+    <div class="field"><label>Emplacement du code</label><input type="text" id="codeEmplacement" placeholder="Ex: Sur le bureau au 2ème étage"/></div>
+    <div class="field"><label>Coordonnées</label><input type="text" id="codeCoords" placeholder="Ex: 171/166"/></div>
+    <div class="field"><label>Notes</label><textarea id="codeNotes" rows="2" placeholder="Infos supplémentaires..."></textarea></div>
+    <div class="field">
+      <label>Image</label>
+      <div id="codeImgPreview" class="img-drop" onclick="document.getElementById('codeImgFile').click()"><div style="text-align:center"><div class="img-hint">Cliquer pour importer</div></div></div>
+      <input type="file" id="codeImgFile" accept="image/*" style="display:none" onchange="loadCodeImg(event)"/>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-muted" style="flex:1" onclick="closeCodeModal()">Annuler</button>
+      <button class="btn btn-gold" style="flex:2" onclick="saveCode()">Enregistrer</button>
+    </div>
   </div>
 </div>
 
@@ -533,6 +603,10 @@ select.ctrl option{background:#14171c}
   <div class="modal" style="max-width:480px">
     <div class="modal-title" id="cacheModalTitle">Ajouter une cache</div>
     <div class="field"><label>Nom / Description *</label><input type="text" id="cacheNom" placeholder="Ex: Cache sous le pont nord"/></div>
+    <div class="field">
+      <label>Zone</label>
+      <select id="cacheZone"></select>
+    </div>
     <div class="field"><label>Coordonnées</label><input type="text" id="cacheCoords" placeholder="Ex: X:7200 Y:3800"/></div>
     <div class="field"><label>Notes</label><textarea id="cacheNotes" placeholder="Détails supplémentaires..." style="min-height:60px"></textarea></div>
     <div class="field">
@@ -641,7 +715,8 @@ function init(){
   localStorage.removeItem('fos_items');
   localStorage.removeItem('fos_quetes');
   localStorage.removeItem('fos_caches');
-  items=[];quetes=[];caches=[];
+  localStorage.removeItem('fos_codes');
+  items=[];quetes=[];caches=[];codes=[];
   document.getElementById('navLogo').src=FOS_IMG;
   buildVendorBar();
   const fsel=document.getElementById('vendorFilter');
@@ -652,7 +727,7 @@ function init(){
   msel.innerHTML='';
   vendors.forEach(v=>{msel.innerHTML+=`<option value="${v}">${v}${specs[v]?' — '+specs[v]:''}</option>`;});
   msel.innerHTML+=`<option value="TOUS">Tous — prix identique partout</option>`;
-  autoLoad();autoLoadQuetes();initQuetes();autoLoadCaches();initMembres();
+  autoLoad();autoLoadQuetes();initQuetes();autoLoadCaches();initCachesUI();autoLoadCodes();initMembres();
 }
 
 function buildVendorBar(){
@@ -711,7 +786,7 @@ function saveItem(){const n=document.getElementById('mNom').value.trim();const p
 function delItem(id){items=items.filter(i=>i.id!==id);saveItems();updateHeroStats();renderList();}
 function confirmAction(cb,msg){document.getElementById('confirmMsg').innerHTML=msg;document.getElementById('confirmOkBtn').onclick=()=>{cb();closeConfirm();};document.getElementById('confirmOverlay').classList.add('open');}
 function closeConfirm(){document.getElementById('confirmOverlay').classList.remove('open');}
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeConfirm();closeQModal();closeCacheModal();closeMembreModal();}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeConfirm();closeQModal();closeCacheModal();closeCodeModal();closeMembreModal();}});
 // ── ZIP HELPERS ──
 function b64ToUint8(b64){const s=b64.split(',')[1];const bin=atob(s);const arr=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)arr[i]=bin.charCodeAt(i);return arr;}
 function isB64(s){return s&&typeof s==='string'&&s.startsWith('data:');}
@@ -738,7 +813,22 @@ function initQuetes(){
   const qvs=document.getElementById('qVendeur');qvs.innerHTML='';vendors.forEach(v=>{qvs.innerHTML+=`<option value="${v}">${v}</option>`;});
   renderQuetes();
 }
-function toggleQFilter(t){qFilters[t]=!qFilters[t];document.getElementById('f-'+t).classList.toggle('on',qFilters[t]);renderQuetes();}
+function toggleQFilter(t){
+  const allOn=Object.values(qFilters).every(v=>v);
+  const onlyThisOn=qFilters[t]&&Object.keys(qFilters).filter(k=>qFilters[k]).length===1;
+  if(allOn){
+    // All visible → show only this type
+    Object.keys(qFilters).forEach(k=>qFilters[k]=false);qFilters[t]=true;
+  }else if(onlyThisOn){
+    // Only this one active → show all
+    Object.keys(qFilters).forEach(k=>qFilters[k]=true);
+  }else{
+    // Mixed → toggle this one
+    qFilters[t]=!qFilters[t];
+  }
+  Object.keys(qFilters).forEach(k=>document.getElementById('f-'+k).classList.toggle('on',qFilters[k]));
+  renderQuetes();
+}
 function typeLabel(t){return t==='principale'?'Tâche Principale':t==='secondaire'?'Tâche Secondaire':t==='contrat'?'Contrat':'Déblocage Arme/Skin';}
 function typePillClass(t){return t==='principale'?'pill-principale':t==='secondaire'?'pill-secondaire':t==='contrat'?'pill-contrat':'pill-deblocage';}
 
@@ -889,14 +979,23 @@ async function importQuetes(e){
 }
 
 // ── CACHES SYSTEM ──
+function initCachesUI(){
+  const zf=document.getElementById('cachesZoneFilter');
+  const zs=document.getElementById('cacheZone');
+  zf.innerHTML='<option value="">Toutes les zones</option>';
+  zs.innerHTML='<option value="">— Aucune —</option>';
+  MAP_ZONES.forEach(z=>{zf.innerHTML+=`<option value="${z}">${z}</option>`;zs.innerHTML+=`<option value="${z}">${z}</option>`;});
+}
 function renderCaches(){
   const q=(document.getElementById('cachesSearch')||{}).value?.toLowerCase()||'';
-  let filtered=caches.filter(c=>{if(q&&!c.nom.toLowerCase().includes(q)&&!(c.coords||'').toLowerCase().includes(q)&&!(c.notes||'').toLowerCase().includes(q))return false;return true;});
+  const zf=document.getElementById('cachesZoneFilter')?.value||'';
+  let filtered=caches.filter(c=>{if(zf&&(c.zone||'')!==zf)return false;if(q&&!c.nom.toLowerCase().includes(q)&&!(c.coords||'').toLowerCase().includes(q)&&!(c.notes||'').toLowerCase().includes(q)&&!(c.zone||'').toLowerCase().includes(q))return false;return true;});
   const grid=document.getElementById('caches-grid');const empty=document.getElementById('caches-empty');
   if(!filtered.length){grid.innerHTML='';empty.style.display='block';return;}
   empty.style.display='none';
   grid.innerHTML=filtered.map(c=>`<div class="cache-card">
     ${c.img?`<img src="${c.img}" class="cache-card-img" onclick="openLightbox('${c.img}')"/>`:''}
+    ${c.zone?`<div style="margin-bottom:6px"><span class="code-zone-tag">${c.zone}</span></div>`:''}
     <div class="cache-card-name">${highlight(c.nom,q)}</div>
     ${c.coords?`<div class="cache-card-coords">📍 ${highlight(c.coords,q)}</div>`:''}
     ${c.notes?`<div class="cache-card-desc">${highlight(c.notes,q)}</div>`:''}
@@ -909,6 +1008,7 @@ function openCacheModal(editId=null){
   pendingCacheEdit=editId;pendingCacheImg=null;
   const c=editId?caches.find(x=>x.id===editId):null;
   document.getElementById('cacheNom').value=c?c.nom:'';document.getElementById('cacheCoords').value=c?c.coords:'';document.getElementById('cacheNotes').value=c?c.notes:'';
+  document.getElementById('cacheZone').value=c&&c.zone?c.zone:'';
   document.getElementById('cacheModalTitle').textContent=editId?'Modifier la cache':'Ajouter une cache';
   if(c&&c.img){pendingCacheImg=c.img;document.getElementById('cacheImgPreview').innerHTML=`<img src="${c.img}"/>`;}else document.getElementById('cacheImgPreview').innerHTML='<div style="text-align:center"><div class="img-hint">Cliquer pour importer</div></div>';
   document.getElementById('cacheImgFile').value='';document.getElementById('cacheModalBg').classList.add('open');
@@ -918,7 +1018,7 @@ document.getElementById('cacheModalBg').addEventListener('click',function(e){if(
 function loadCacheImg(e){const f=e.target.files[0];if(!f)return;compressImage(f,800,600,0.6).then(d=>{pendingCacheImg=d;document.getElementById('cacheImgPreview').innerHTML=`<img src="${d}"/>`;});}
 function saveCache(){
   const nom=document.getElementById('cacheNom').value.trim();if(!nom)return;
-  const c={id:pendingCacheEdit||(Date.now()+'_'+Math.random().toString(36).slice(2)),nom,coords:document.getElementById('cacheCoords').value.trim(),notes:document.getElementById('cacheNotes').value.trim(),img:pendingCacheImg||null};
+  const c={id:pendingCacheEdit||(Date.now()+'_'+Math.random().toString(36).slice(2)),nom,zone:document.getElementById('cacheZone').value,coords:document.getElementById('cacheCoords').value.trim(),notes:document.getElementById('cacheNotes').value.trim(),img:pendingCacheImg||null};
   if(pendingCacheEdit){const i=caches.findIndex(x=>x.id===pendingCacheEdit);if(i>-1){c.img=pendingCacheImg||caches[i].img;caches[i]=c;}toast('Cache modifiée');}else{caches.push(c);toast('Cache ajoutée');}
   saveCachesStorage();closeCacheModal();renderCaches();
 }
@@ -933,6 +1033,97 @@ function exportCaches(){
 function importCaches(e){
   const f=e.target.files[0];if(!f)return;
   const r=new FileReader();r.onload=ev=>{try{const d=JSON.parse(ev.target.result);if(d.caches){caches=d.caches;saveCachesStorage();renderCaches();toast(caches.length+' caches importées');}}catch{toast('Fichier invalide');}e.target.value='';};r.readAsText(f);
+}
+
+// ── CODES SYSTEM ──
+const MAP_ZONES=['Kiu Vongsa','Hunter\'s Paradise','Scierie','YBL-1','Aérodrome de Phalang','Lagon Bleu','Ban PA','Midnight Sapphire','Fort Narith','Tiger Bay'];
+let codes=[];
+let pendingCodeEdit=null;
+let pendingCodeImg=null;
+
+function saveCodesStorage(){try{localStorage.setItem('fos_codes',JSON.stringify(codes));}catch(e){}}
+async function autoLoadCodes(){
+  try{const s=localStorage.getItem('fos_codes');if(s){codes=JSON.parse(s);}}catch(e){}
+  if(!codes.length){try{const r=await fetch('codes.json?v='+Date.now());if(r.ok){const d=await r.json();if(d.codes){codes=d.codes;saveCodesStorage();}}}catch{}}
+  initCodesUI();renderCodes();
+}
+function initCodesUI(){
+  const zf=document.getElementById('codesZoneFilter');
+  const zs=document.getElementById('codeZone');
+  zf.innerHTML='<option value="">Toutes les zones</option>';
+  zs.innerHTML='';
+  MAP_ZONES.forEach(z=>{zf.innerHTML+=`<option value="${z}">${z}</option>`;zs.innerHTML+=`<option value="${z}">${z}</option>`;});
+}
+function renderCodes(){
+  const q=(document.getElementById('codesSearch')||{}).value?.toLowerCase()||'';
+  const zf=document.getElementById('codesZoneFilter')?.value||'';
+  const tf=document.getElementById('codesTypeFilter')?.value||'';
+  let filtered=codes.filter(c=>{
+    if(zf&&c.zone!==zf)return false;
+    if(tf&&c.type!==tf)return false;
+    if(q&&!c.nom.toLowerCase().includes(q)&&!(c.zone||'').toLowerCase().includes(q)&&!(c.emplacement||'').toLowerCase().includes(q)&&!(c.notes||'').toLowerCase().includes(q)&&!(c.valeur||'').toLowerCase().includes(q))return false;
+    return true;
+  });
+  filtered.sort((a,b)=>a.zone.localeCompare(b.zone,'fr')||a.nom.localeCompare(b.nom,'fr'));
+  const grid=document.getElementById('codes-grid');const empty=document.getElementById('codes-empty');
+  if(!filtered.length){grid.innerHTML='';empty.style.display='block';return;}
+  empty.style.display='none';
+  grid.innerHTML=filtered.map(c=>`<div class="cache-card">
+    ${c.img?`<img src="${c.img}" class="cache-card-img" onclick="openLightbox('${c.img}')"/>`:''} 
+    <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-bottom:6px"><span class="code-zone-tag">${c.zone}</span><span class="code-type ${c.type}">${c.type==='fixe'?'🔒 Fixe':'🔄 Dynamique'}</span></div>
+    <div class="cache-card-name">${highlight(c.nom,q)}</div>
+    ${c.valeur?`<div class="code-valeur">${highlight(c.valeur,q)}</div>`:''}
+    ${c.emplacement?`<div class="cache-card-desc">📍 ${highlight(c.emplacement,q)}</div>`:''}
+    ${c.coords?`<div class="cache-card-coords">🗺️ ${highlight(c.coords,q)}</div>`:''}
+    ${c.notes?`<div class="cache-card-desc" style="margin-top:4px;color:#5a5248">${highlight(c.notes,q)}</div>`:''}
+    <div class="cache-actions">
+      <button class="del-btn" style="color:#c9a84c77;font-size:11px" onclick="openCodeModal('${c.id}')">✏ Modifier</button>
+      <button class="del-btn" onclick="confirmAction(()=>delCode('${c.id}'),'Supprimer ce code ?')">✕ Suppr.</button>
+    </div></div>`).join('');
+}
+function openCodeModal(editId=null){
+  pendingCodeEdit=editId;pendingCodeImg=null;
+  const c=editId?codes.find(x=>x.id===editId):null;
+  document.getElementById('codeNom').value=c?c.nom:'';
+  document.getElementById('codeValeur').value=c?c.valeur||'':'';
+  document.getElementById('codeEmplacement').value=c?c.emplacement||'':'';
+  document.getElementById('codeCoords').value=c?c.coords||'':'';
+  document.getElementById('codeNotes').value=c?c.notes||'':'';
+  document.getElementById('codeModalTitle').textContent=editId?'Modifier le code':'Ajouter un code';
+  if(c){document.getElementById('codeZone').value=c.zone||MAP_ZONES[0];document.getElementById('codeType').value=c.type||'fixe';}
+  else{document.getElementById('codeZone').value=MAP_ZONES[0];document.getElementById('codeType').value='fixe';}
+  if(c&&c.img){pendingCodeImg=c.img;document.getElementById('codeImgPreview').innerHTML=`<img src="${c.img}"/>`;}
+  else document.getElementById('codeImgPreview').innerHTML='<div style="text-align:center"><div class="img-hint">Cliquer pour importer</div></div>';
+  document.getElementById('codeImgFile').value='';document.getElementById('codeModalBg').classList.add('open');
+}
+function closeCodeModal(){document.getElementById('codeModalBg').classList.remove('open');pendingCodeEdit=null;}
+document.getElementById('codeModalBg').addEventListener('click',function(e){if(e.target===this)closeCodeModal();});
+function loadCodeImg(e){const f=e.target.files[0];if(!f)return;compressImage(f,800,600,0.6).then(d=>{pendingCodeImg=d;document.getElementById('codeImgPreview').innerHTML=`<img src="${d}"/>`;});}
+function saveCode(){
+  const nom=document.getElementById('codeNom').value.trim();if(!nom)return;
+  const zone=document.getElementById('codeZone').value;
+  const type=document.getElementById('codeType').value;
+  const c={id:pendingCodeEdit||(Date.now()+'_'+Math.random().toString(36).slice(2)),nom,zone,type,
+    valeur:document.getElementById('codeValeur').value.trim(),
+    emplacement:document.getElementById('codeEmplacement').value.trim(),
+    coords:document.getElementById('codeCoords').value.trim(),
+    notes:document.getElementById('codeNotes').value.trim(),
+    img:pendingCodeImg||null};
+  if(pendingCodeEdit){const i=codes.findIndex(x=>x.id===pendingCodeEdit);if(i>-1){c.img=pendingCodeImg||codes[i].img;codes[i]=c;}toast('Code modifié');}
+  else{codes.push(c);toast('Code ajouté');}
+  saveCodesStorage();closeCodeModal();renderCodes();
+}
+function delCode(id){codes=codes.filter(c=>c.id!==id);saveCodesStorage();renderCodes();}
+function exportCodes(){
+  if(!codes.length){toast('Aucun code');return;}
+  const d={codes};const b=new Blob([JSON.stringify(d,null,2)],{type:'application/json'});
+  const u=URL.createObjectURL(b);const a=document.createElement('a');a.href=u;
+  a.download='fos_codes_'+new Date().toISOString().slice(0,10)+'.json';a.click();
+  toast('Export — '+codes.length+' codes');
+}
+function importCodes(e){
+  const f=e.target.files[0];if(!f)return;
+  const r=new FileReader();r.onload=ev=>{try{const d=JSON.parse(ev.target.result);if(d.codes){codes=d.codes;saveCodesStorage();renderCodes();toast(codes.length+' codes importés');}}catch{toast('Fichier invalide');}e.target.value='';};r.readAsText(f);
 }
 
 // ── MEMBRES (STATIQUE) ──
