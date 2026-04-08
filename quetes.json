@@ -1,5 +1,5 @@
 {
-  "version": "2026-04-08 15:54",
+  "version": "2026-04-08 16:05",
   "quetes": [
     {
       "id": "1775157632374_a298ft1e32",
@@ -329,7 +329,7 @@
       "id": "1775661138223_a2ngpssqw3d",
       "nom": "Pistolets et munitions",
       "type": "principale",
-      "vendeur": "HANDSHAKE",
+      "vendeur": "GUNNY",
       "desc": "Découvrez ce qui est arrivé sur la route menant au Hunter's Paradis",
       "reward": "500 repu (gunny) + 600 exp + 2820 usd + 4 items",
       "cover": "images/cover_43.jpg",
@@ -372,7 +372,7 @@
           ]
         },
         {
-          "titre": "déplacez-vous dans l'armurerie de Hunter's Paradis",
+          "titre": "Déplacez-vous dans l'armurerie de Hunter's Paradis",
           "desc": "Déplacez-vous dans l'entrepôt pour trouver la porte de la réserve d'armes et ouvrir avec la clé trouve sur un PNJ",
           "imgs": [
             {
