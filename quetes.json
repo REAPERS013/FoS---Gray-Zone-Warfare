@@ -1,5 +1,5 @@
 {
-  "version": "2026-04-08 21:01",
+  "version": "2026-04-09 02:25",
   "quetes": [
     {
       "id": "1775157632374_a298ft1e32",
@@ -662,6 +662,163 @@
               "desc": ""
             }
           ]
+        }
+      ]
+    },
+    {
+      "id": "1775694352911_tcrq1nw6m1l",
+      "nom": "VENI,VIDI,VICI",
+      "type": "principale",
+      "vendeur": "HANDSHAKE",
+      "desc": "Quest a plusieurs étape",
+      "reward": "500 repu (handshake) + 500 exp + 650 usd + 1 items",
+      "cover": "images/cover_86.jpg",
+      "etapes": [
+        {
+          "titre": "Ce rendre a la crète",
+          "desc": "Déplacez-vous sous la tente verte",
+          "imgs": [
+            {
+              "src": "images/step_87.jpg",
+              "coords": "138-143",
+              "desc": "La tente verte vous devez simplement vous déplacer a l'intérieur"
+            },
+            {
+              "src": "images/step_88.jpg",
+              "coords": "138-143",
+              "desc": ""
+            }
+          ]
+        },
+        {
+          "titre": "Plusieurs points a faire-------------------------",
+          "desc": "Première étape : Trouver le code de la porte\n\nDeuxième étape : trouver trois (3) emplacement/objets:\n-premier au bureaux\n-deuxième a la scie\n-troisième dans l'entrepôt",
+          "imgs": [
+            {
+              "src": "images/step_89.jpg",
+              "coords": "139-144",
+              "desc": "Le document est sur la table blanche, code a l'intérieur"
+            },
+            {
+              "src": "images/step_90.jpg",
+              "coords": "139-144",
+              "desc": ""
+            },
+            {
+              "src": "images/step_91.jpg",
+              "coords": "139-143",
+              "desc": "La porte a débarrer"
+            },
+            {
+              "src": "images/step_92.jpg",
+              "coords": "139-143",
+              "desc": ""
+            },
+            {
+              "src": "images/step_93.jpg",
+              "coords": "139-143",
+              "desc": "Premier document sur le lavabos"
+            },
+            {
+              "src": "images/step_94.jpg",
+              "coords": "139-144",
+              "desc": "Le tableau a vérifier seulement appuyer sur F "
+            },
+            {
+              "src": "images/step_95.jpg",
+              "coords": "139-144",
+              "desc": ""
+            },
+            {
+              "src": "images/step_96.jpg",
+              "coords": "139-144",
+              "desc": "Lit d'hôpital a vérifier seulement appuyer sur F "
+            },
+            {
+              "src": "images/step_97.jpg",
+              "coords": "139-144",
+              "desc": ""
+            },
+            {
+              "src": "images/step_98.jpg",
+              "coords": "139-143",
+              "desc": "Document gris sur le bureau a vérifier seulement appuyer sur F "
+            },
+            {
+              "src": "images/step_99.jpg",
+              "coords": "139-143",
+              "desc": ""
+            }
+          ]
+        },
+        {
+          "titre": "Ce rendre au camp pour vérifier ce qui s'est arrivé et fin de mission",
+          "desc": "Dirigez-vous a la cabane de pêche pour vérifier un cadavre",
+          "imgs": [
+            {
+              "src": "images/step_100.jpg",
+              "coords": "141-145",
+              "desc": "Cabane de pêche"
+            },
+            {
+              "src": "images/step_101.jpg",
+              "coords": "141-145",
+              "desc": "corps a vérifier seulement appuyer sur F"
+            },
+            {
+              "src": "images/step_102.jpg",
+              "coords": "141-145",
+              "desc": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1775701501336_uw0pd6ulua",
+      "nom": "Objet inedtimable",
+      "type": "secondaire",
+      "vendeur": "HANDSHAKE",
+      "desc": "Trouver un club de golf en or",
+      "reward": "306 rep + 600 exp + 1880 usd",
+      "cover": "images/cover_103.jpg",
+      "etapes": [
+        {
+          "titre": "Aller sur les Lieux",
+          "desc": "Dirigez-vous au petit shack dans le terrain de golf a Might Saphir",
+          "imgs": [
+            {
+              "src": "images/step_104.jpg",
+              "coords": "168-169",
+              "desc": ""
+            },
+            {
+              "src": "images/step_105.jpg",
+              "coords": "168-169",
+              "desc": "petit shack a trois (3) porte"
+            }
+          ]
+        },
+        {
+          "titre": "Trouver le club de golf doré",
+          "desc": "Dirigez-vous soi a la première porte ou la dernière port deux spawn possible",
+          "imgs": [
+            {
+              "src": "images/step_106.jpg",
+              "coords": "168-169",
+              "desc": "premier spawn"
+            },
+            {
+              "src": "images/step_107.jpg",
+              "coords": "168-169",
+              "desc": "Deuxième spawn"
+            }
+          ]
+        },
+        {
+          "titre": "fin de la quest",
+          "desc": "Dirigez-vous vers un point d'extraction pour donner le club soi a Handshak ou a Turncoat",
+          "imgs": []
         }
       ]
     }

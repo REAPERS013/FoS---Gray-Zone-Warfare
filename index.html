@@ -432,6 +432,7 @@ select.ctrl option{background:#14171c}
   <div class="quetes-controls">
     <div class="search-wrap" style="flex:1;min-width:180px"><span class="s-ico">&#9906;</span><input type="text" id="qsearch" placeholder="Rechercher une quête..." oninput="renderQuetes()" style="width:100%;background:#0f1216;border:1px solid #c9a84c33;color:#e8e0cc;padding:7px 12px 7px 34px;font-family:'Rajdhani',sans-serif;font-size:14px;outline:none"/></div>
     <select class="ctrl" id="qvendorFilter" onchange="renderQuetes()"><option value="">Tous les vendeurs</option></select>
+    <select class="ctrl" id="qzoneFilter" onchange="renderQuetes()" style="min-width:140px"><option value="">Toutes les zones</option></select>
     <button class="type-badge type-principale on" id="f-principale" onclick="toggleQFilter('principale')">Tâche Principale</button>
     <button class="type-badge type-secondaire on" id="f-secondaire" onclick="toggleQFilter('secondaire')">Tâche Secondaire</button>
     <button class="type-badge type-contrat on" id="f-contrat" onclick="toggleQFilter('contrat')">Contrat</button>
@@ -577,8 +578,9 @@ select.ctrl option{background:#14171c}
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
       <div class="field"><label>Vendeur lié</label><select id="qVendeur"></select></div>
-      <div class="field"><label>Récompense</label><input type="text" id="qReward" placeholder="Ex: 5 000 $ + Réputation"/></div>
+      <div class="field"><label>Zone</label><select id="qZone"></select></div>
     </div>
+    <div class="field"><label>Récompense</label><input type="text" id="qReward" placeholder="Ex: 5 000 $ + Réputation"/></div>
     <div class="field">
       <label>Image de présentation (optionnel)</label>
       <div id="qCoverPreview" class="quete-cover-placeholder" onclick="document.getElementById('qCoverFile').click()"><span class="quete-cover-hint">Cliquer pour importer une image de présentation</span></div>
@@ -813,6 +815,8 @@ function toast(msg){const t=document.createElement('div');t.className='toast';t.
 function initQuetes(){
   const qvf=document.getElementById('qvendorFilter');qvf.innerHTML=`<option value="">Tous les vendeurs</option>`;vendors.forEach(v=>{qvf.innerHTML+=`<option value="${v}">${v}</option>`;});
   const qvs=document.getElementById('qVendeur');qvs.innerHTML='';vendors.forEach(v=>{qvs.innerHTML+=`<option value="${v}">${v}</option>`;});
+  const qzf=document.getElementById('qzoneFilter');qzf.innerHTML='<option value="">Toutes les zones</option>';MAP_ZONES.forEach(z=>{qzf.innerHTML+=`<option value="${z}">${z}</option>`;});
+  const qzs=document.getElementById('qZone');qzs.innerHTML='<option value="">— Aucune —</option>';MAP_ZONES.forEach(z=>{qzs.innerHTML+=`<option value="${z}">${z}</option>`;});
   renderQuetes();
 }
 function toggleQFilter(t){
@@ -835,8 +839,8 @@ function typeLabel(t){return t==='principale'?'Tâche Principale':t==='secondair
 function typePillClass(t){return t==='principale'?'pill-principale':t==='secondaire'?'pill-secondaire':t==='contrat'?'pill-contrat':'pill-deblocage';}
 
 function renderQuetes(){
-  const q=document.getElementById('qsearch').value.toLowerCase();const vf=document.getElementById('qvendorFilter').value;
-  let filtered=quetes.filter(qt=>{if(!qFilters[qt.type])return false;if(vf&&qt.vendeur!==vf)return false;if(q&&!qt.nom.toLowerCase().includes(q)&&!(qt.desc||'').toLowerCase().includes(q))return false;return true;});
+  const q=document.getElementById('qsearch').value.toLowerCase();const vf=document.getElementById('qvendorFilter').value;const zf=document.getElementById('qzoneFilter').value;
+  let filtered=quetes.filter(qt=>{if(!qFilters[qt.type])return false;if(vf&&qt.vendeur!==vf)return false;if(zf&&(qt.zone||'')!==zf)return false;if(q&&!qt.nom.toLowerCase().includes(q)&&!(qt.desc||'').toLowerCase().includes(q)&&!(qt.zone||'').toLowerCase().includes(q))return false;return true;});
   const grid=document.getElementById('quetes-grid');const empty=document.getElementById('quetes-empty');
   const done=quetes.filter(q=>q.completed).length;
   document.getElementById('qCount').textContent=quetes.length+(done?` (${done} terminée${done>1?'s':''})`:'');
@@ -849,7 +853,7 @@ function renderQuetes(){
   const tImgs=qt=>(qt.etapes||[]).reduce((a,e)=>a+(e.imgs||[]).length,0);
   grid.innerHTML=filtered.map(qt=>`<div class="quete-card ${qt.type}${qt.completed?' completed':''}" onclick="openQDetail('${qt.id}')">${qt.cover?`<img src="${qt.cover}" style="width:100%;height:100px;object-fit:cover;opacity:0.7"/>`:''}
     <div class="quete-card-header" style="padding-top:${qt.cover?'10px':'0'}"><div class="quete-card-title">${highlight(qt.nom,q)}</div><span class="quete-type-pill ${typePillClass(qt.type)}">${typeLabel(qt.type)}</span></div>
-    <div class="quete-card-vendor">${qt.vendeur}</div><div class="quete-card-desc">${qt.desc?highlight(qt.desc,q):'—'}</div>
+    <div class="quete-card-vendor">${qt.vendeur}${qt.zone?' · '+qt.zone:''}</div><div class="quete-card-desc">${qt.desc?highlight(qt.desc,q):'—'}</div>
     <div class="quete-card-footer"><span class="quete-card-reward">${qt.reward?'🎁 '+qt.reward:''}</span><span class="quete-card-imgs">${(qt.etapes||[]).length} étape${(qt.etapes||[]).length!==1?'s':''} · ${tImgs(qt)} img</span>
     <div class="quete-card-actions" onclick="event.stopPropagation()"><button class="quete-act-btn edit" onclick="openQModal('${qt.id}')">✏ Modifier</button><button class="quete-act-btn del" onclick="confirmAction(()=>delQuete('${qt.id}'),'Supprimer <b>${qt.nom.replace(/'/g,"&#39;")}</b> ?')">✕ Supprimer</button></div></div>
     ${(qt.etapes||[]).length?`<div class="quete-progress"><div class="quete-progress-fill" style="width:${qt.completed?100:0}%"></div></div>`:''}</div>`).join('');
@@ -873,6 +877,7 @@ function openQModal(editId=null){
   document.getElementById('qmodal-title').textContent=editId?'Modifier la quête':'Ajouter une quête';
   for(let o of document.getElementById('qType').options)if(o.value===(qt?qt.type:'principale')){o.selected=true;break;}
   for(let o of document.getElementById('qVendeur').options)if(o.value===(qt?qt.vendeur:vendors[0])){o.selected=true;break;}
+  document.getElementById('qZone').value=qt&&qt.zone?qt.zone:'';
   qSteps=qt&&qt.etapes?qt.etapes.map(e=>({...e,imgs:(e.imgs||[]).map(i=>({...i}))})):[];
   qCoverPending=qt&&qt.cover?qt.cover:null;
   document.getElementById('qCoverPreview').innerHTML=qCoverPending?`<img src="${qCoverPending}" class="quete-cover-preview"/>`:'<span class="quete-cover-hint">Cliquer pour importer une image</span>';
@@ -929,7 +934,7 @@ function renderStepSlots(){
 
 function saveQuete(){
   const nom=document.getElementById('qNom').value.trim();if(!nom){document.getElementById('qNom').style.borderColor='#c94c4c';return;}
-  const qt={id:pendingQEdit||(Date.now()+'_'+Math.random().toString(36).slice(2)),nom,type:document.getElementById('qType').value,vendeur:document.getElementById('qVendeur').value,desc:document.getElementById('qDesc').value.trim(),reward:document.getElementById('qReward').value.trim(),cover:qCoverPending||null,etapes:qSteps.map(s=>({...s,imgs:[...s.imgs]}))};
+  const qt={id:pendingQEdit||(Date.now()+'_'+Math.random().toString(36).slice(2)),nom,type:document.getElementById('qType').value,vendeur:document.getElementById('qVendeur').value,zone:document.getElementById('qZone').value,desc:document.getElementById('qDesc').value.trim(),reward:document.getElementById('qReward').value.trim(),cover:qCoverPending||null,etapes:qSteps.map(s=>({...s,imgs:[...s.imgs]}))};
   if(pendingQEdit){const i=quetes.findIndex(q=>q.id===pendingQEdit);if(i>-1)quetes[i]=qt;toast('Quête modifiée');}else{quetes.push(qt);toast('Quête ajoutée');}
   saveQuetesStorage();updateHeroStats();closeQModal();renderQuetes();
 }
@@ -1016,9 +1021,10 @@ function openCacheModal(editId=null){
   renderCacheImgPreviews();
   document.getElementById('cacheImgFile').value='';document.getElementById('cacheModalBg').classList.add('open');
 }
+function moveCacheImg(i,dir){const j=i+dir;if(j<0||j>=pendingCacheImgs.length)return;[pendingCacheImgs[i],pendingCacheImgs[j]]=[pendingCacheImgs[j],pendingCacheImgs[i]];renderCacheImgPreviews();}
 function renderCacheImgPreviews(){
   const cont=document.getElementById('cacheImgsContainer');
-  cont.innerHTML=pendingCacheImgs.map((src,i)=>`<div style="position:relative;width:100px;height:80px;border:1px solid #1e2228;overflow:hidden"><img src="${src}" style="width:100%;height:100%;object-fit:cover"/><button onclick="pendingCacheImgs.splice(${i},1);renderCacheImgPreviews()" style="position:absolute;top:2px;right:2px;background:#0a0c0e99;border:none;color:#c94c4c;cursor:pointer;font-size:14px;padding:0 4px">✕</button></div>`).join('');
+  cont.innerHTML=pendingCacheImgs.map((src,i)=>`<div style="position:relative;width:100px;height:80px;border:1px solid #1e2228;overflow:hidden"><img src="${src}" style="width:100%;height:100%;object-fit:cover"/><div style="position:absolute;top:2px;left:2px;display:flex;flex-direction:column;gap:1px"><button onclick="moveCacheImg(${i},-1)" style="background:#0a0c0ecc;border:none;color:#c9a84c;cursor:pointer;font-size:10px;padding:0 3px;line-height:14px"${i===0?' disabled':''}>▲</button><button onclick="moveCacheImg(${i},1)" style="background:#0a0c0ecc;border:none;color:#c9a84c;cursor:pointer;font-size:10px;padding:0 3px;line-height:14px"${i===pendingCacheImgs.length-1?' disabled':''}>▼</button></div><button onclick="pendingCacheImgs.splice(${i},1);renderCacheImgPreviews()" style="position:absolute;top:2px;right:2px;background:#0a0c0e99;border:none;color:#c94c4c;cursor:pointer;font-size:14px;padding:0 4px">✕</button></div>`).join('');
 }
 function closeCacheModal(){document.getElementById('cacheModalBg').classList.remove('open');pendingCacheEdit=null;}
 document.getElementById('cacheModalBg').addEventListener('click',function(e){if(e.target===this)closeCacheModal();});
@@ -1105,9 +1111,10 @@ function openCodeModal(editId=null){
 }
 function closeCodeModal(){document.getElementById('codeModalBg').classList.remove('open');pendingCodeEdit=null;}
 document.getElementById('codeModalBg').addEventListener('click',function(e){if(e.target===this)closeCodeModal();});
+function moveCodeImg(i,dir){const j=i+dir;if(j<0||j>=pendingCodeImgs.length)return;[pendingCodeImgs[i],pendingCodeImgs[j]]=[pendingCodeImgs[j],pendingCodeImgs[i]];renderCodeImgPreviews();}
 function renderCodeImgPreviews(){
   const cont=document.getElementById('codeImgsContainer');
-  cont.innerHTML=pendingCodeImgs.map((src,i)=>`<div style="position:relative;width:100px;height:80px;border:1px solid #1e2228;overflow:hidden"><img src="${src}" style="width:100%;height:100%;object-fit:cover"/><button onclick="pendingCodeImgs.splice(${i},1);renderCodeImgPreviews()" style="position:absolute;top:2px;right:2px;background:#0a0c0e99;border:none;color:#c94c4c;cursor:pointer;font-size:14px;padding:0 4px">✕</button></div>`).join('');
+  cont.innerHTML=pendingCodeImgs.map((src,i)=>`<div style="position:relative;width:100px;height:80px;border:1px solid #1e2228;overflow:hidden"><img src="${src}" style="width:100%;height:100%;object-fit:cover"/><div style="position:absolute;top:2px;left:2px;display:flex;flex-direction:column;gap:1px"><button onclick="moveCodeImg(${i},-1)" style="background:#0a0c0ecc;border:none;color:#c9a84c;cursor:pointer;font-size:10px;padding:0 3px;line-height:14px"${i===0?' disabled':''}>▲</button><button onclick="moveCodeImg(${i},1)" style="background:#0a0c0ecc;border:none;color:#c9a84c;cursor:pointer;font-size:10px;padding:0 3px;line-height:14px"${i===pendingCodeImgs.length-1?' disabled':''}>▼</button></div><button onclick="pendingCodeImgs.splice(${i},1);renderCodeImgPreviews()" style="position:absolute;top:2px;right:2px;background:#0a0c0e99;border:none;color:#c94c4c;cursor:pointer;font-size:14px;padding:0 4px">✕</button></div>`).join('');
 }
 function loadCodeImg(e){const f=e.target.files[0];if(!f)return;compressImage(f,800,600,0.6).then(d=>{pendingCodeImgs.push(d);renderCodeImgPreviews();});e.target.value='';}
 function saveCode(){
