@@ -1,5 +1,5 @@
 {
-  "version": "2026-04-09 02:25",
+  "version": "2026-04-09 09:20",
   "quetes": [
     {
       "id": "1775157632374_a298ft1e32",
@@ -819,6 +819,109 @@
           "titre": "fin de la quest",
           "desc": "Dirigez-vous vers un point d'extraction pour donner le club soi a Handshak ou a Turncoat",
           "imgs": []
+        }
+      ]
+    },
+    {
+      "id": "1775724413560_g60zrubpaym",
+      "nom": "Ramasse-miettes",
+      "type": "principale",
+      "vendeur": "LAB RAT",
+      "zone": "Tiger Bay",
+      "desc": "Récupérez le kit d'analyse et faites votre rapport à Lab Rat",
+      "reward": "Rép / XP / $ / items",
+      "cover": "images/cover_108.jpg",
+      "etapes": [
+        {
+          "titre": "Direction l'avant poste à l'Ouest",
+          "desc": "",
+          "imgs": [
+            {
+              "src": "images/step_109.jpg",
+              "coords": "192/128",
+              "desc": "Rentrer dans le conteneur"
+            },
+            {
+              "src": "images/step_110.jpg",
+              "coords": "192/128",
+              "desc": "Prendre le kit"
+            }
+          ]
+        },
+        {
+          "titre": "Trouver les dossiers médicaux",
+          "desc": "Direction le camp de réfugiés de l'UNLRA à l'EST",
+          "imgs": [
+            {
+              "src": "images/step_111.jpg",
+              "coords": "200/130",
+              "desc": "Aller dans la tente de droite"
+            },
+            {
+              "src": "images/step_112.jpg",
+              "coords": "200/130",
+              "desc": "Prendre le document à coter du pc"
+            }
+          ]
+        },
+        {
+          "titre": "Fouiller le camp et trouver le cadavre",
+          "desc": "Clé nécessaire TB UNQuar, se trouve sur les cadavres",
+          "imgs": [
+            {
+              "src": "images/step_113.jpg",
+              "coords": "200/130",
+              "desc": "Direction le conteneur après la tente"
+            },
+            {
+              "src": "images/step_114.jpg",
+              "coords": "200/130",
+              "desc": "Trouver le corp sur le lit"
+            }
+          ]
+        },
+        {
+          "titre": "Prendre un échantillon",
+          "desc": "",
+          "imgs": [
+            {
+              "src": "images/step_115.jpg",
+              "coords": "200/130",
+              "desc": "Prendre l'échantillons juste à coter du cadavre"
+            }
+          ]
+        },
+        {
+          "titre": "Retourner au quartier général de l'UNLRA",
+          "desc": "Bâtiment en EST, clé nécessaire TB LabUN",
+          "imgs": [
+            {
+              "src": "images/step_116.jpg",
+              "coords": "201/132",
+              "desc": "Prendre la porte de droite"
+            },
+            {
+              "src": "images/step_117.jpg",
+              "coords": "201/132",
+              "desc": "Aller dans le réfrigirateur"
+            },
+            {
+              "src": "images/step_118.jpg",
+              "coords": "201/132",
+              "desc": "Prendre l'échantillons "
+            }
+          ]
+        },
+        {
+          "titre": "Rendre les objets",
+          "desc": "",
+          "imgs": [
+            {
+              "src": "images/step_119.jpg",
+              "coords": "",
+              "desc": ""
+            }
+          ]
         }
       ]
     }
