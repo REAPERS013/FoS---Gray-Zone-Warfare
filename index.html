@@ -325,6 +325,25 @@ select.ctrl option{background:#14171c}
 .code-zone-tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:2px 8px;color:#5a7a8a;border:1px solid #5a7a8a44;background:#5a7a8a11;margin-right:6px}
 .code-valeur{font-family:'Share Tech Mono',monospace;font-size:18px;color:#c9a84c;letter-spacing:3px;margin:6px 0}
 
+/* ── RECAP VIEW ── */
+.recap-sheet{padding:20px;background:#0a0c0e;min-height:calc(100vh - 200px)}
+.recap-title{font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:6px;color:#c9a84c;text-align:center;margin-bottom:4px}
+.recap-subtitle{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#5a5248;text-align:center;margin-bottom:24px}
+.recap-group{margin-bottom:24px}
+.recap-group-header{display:flex;align-items:center;gap:12px;padding:8px 14px;background:#c9a84c;margin-bottom:2px}
+.recap-group-name{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:4px;color:#0a0c0e;text-transform:uppercase}
+.recap-group-spec{font-size:11px;font-style:italic;color:#0a0c0eaa;letter-spacing:1px}
+.recap-group-count{margin-left:auto;font-family:'Share Tech Mono',monospace;font-size:13px;color:#0a0c0e99}
+.recap-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:2px}
+.recap-item{background:#14171c;padding:6px;display:flex;flex-direction:column;align-items:center;position:relative;border:1px solid #1e2228;transition:border-color 0.15s}
+.recap-item:hover{border-color:#c9a84c55}
+.recap-item-price{position:absolute;top:0;left:0;background:#c9a84c;color:#0a0c0e;font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:1px;padding:1px 8px;line-height:1.3;z-index:1}
+.recap-item-img{width:90px;height:90px;display:flex;align-items:center;justify-content:center;margin:4px 0}
+.recap-item-img img{max-width:100%;max-height:100%;object-fit:contain}
+.recap-item-ph{color:#252320;font-size:9px;font-family:'Share Tech Mono',monospace;letter-spacing:1px}
+.recap-item-name{font-size:11px;color:#e8e0cc;text-align:center;line-height:1.3;margin-top:2px;word-break:break-word;max-height:28px;overflow:hidden}
+.recap-footer{text-align:center;padding:20px;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#5a524855}
+
 /* ── MOBILE ── */
 .nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px}
 .nav-hamburger span{width:22px;height:2px;background:#c9a84c;transition:all 0.2s}
@@ -414,6 +433,7 @@ select.ctrl option{background:#14171c}
     <button class="btn btn-muted" onclick="document.getElementById('importFile').click()">&#8599; Importer</button>
     <input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(event)"/>
     <button class="btn btn-ghost" onclick="exportData()">&#8600; Exporter</button>
+    <button class="btn btn-ghost" id="recapBtn" onclick="toggleRecap()" style="border-color:#c9a84c88;color:#c9a84c">◫ Récap</button>
     <button class="btn btn-gold" onclick="openModal()">+ Ajouter</button>
   </div>
   <div class="summary-bar">
@@ -425,6 +445,7 @@ select.ctrl option{background:#14171c}
   </div>
   <div class="list" id="list"></div>
   <div class="empty-state" id="empty">Aucun objet répertorié<br><span style="color:#c9a84c;cursor:pointer" onclick="openModal()">+ Ajouter un objet</span></div>
+  <div id="recapView" style="display:none"></div>
 </div>
 
 <!-- PAGE QUÊTES -->
@@ -779,6 +800,85 @@ function renderList(){
   document.getElementById('sumCount').textContent=items.length;buildVendorBar();
 }
 function copyPrice(p){navigator.clipboard.writeText(p).then(()=>toast('Prix copié')).catch(()=>{});}
+
+// ── RECAP VIEW ──
+let recapMode=false;
+function toggleRecap(){
+  recapMode=!recapMode;
+  const btn=document.getElementById('recapBtn');
+  const listEls=['vbar','list','empty','search','vendorFilter','sortPrix','sortNom'];
+  const listHeader=document.querySelector('.list-header');
+  const summaryBar=document.querySelector('#page-ventes .summary-bar');
+  const recapView=document.getElementById('recapView');
+  if(recapMode){
+    btn.style.background='#c9a84c';btn.style.color='#0a0c0e';
+    listEls.forEach(id=>{const el=document.getElementById(id);if(el)el.style.display='none';});
+    if(listHeader)listHeader.style.display='none';
+    if(summaryBar)summaryBar.style.display='none';
+    recapView.style.display='block';
+    renderRecap();
+  }else{
+    btn.style.background='';btn.style.color='#c9a84c';
+    document.getElementById('vbar').style.display='';
+    document.getElementById('list').style.display='';
+    document.getElementById('search').style.display='';
+    document.getElementById('vendorFilter').style.display='';
+    document.getElementById('sortPrix').style.display='';
+    document.getElementById('sortNom').style.display='';
+    if(listHeader)listHeader.style.display='';
+    if(summaryBar)summaryBar.style.display='';
+    recapView.style.display='none';
+    renderList();
+  }
+}
+function formatPriceShort(p){
+  const n=parseFloat(p)||0;
+  if(n>=1000)return(n/1000).toFixed(n%1000===0?0:1).replace('.',',')+'k';
+  return n+'$';
+}
+function renderRecap(){
+  const rv=document.getElementById('recapView');
+  if(!items.length){rv.innerHTML='<div class="empty-state">Aucun objet à afficher</div>';return;}
+  // Group by vendor
+  const groups={};
+  const vendorOrder=[...vendors,'TOUS'];
+  vendorOrder.forEach(v=>{groups[v]=[];});
+  items.forEach(it=>{
+    const v=it.vendeur||'TOUS';
+    if(!groups[v])groups[v]=[];
+    groups[v].push(it);
+  });
+  // Sort each group by price desc
+  Object.keys(groups).forEach(k=>{
+    groups[k].sort((a,b)=>(parseFloat(b.prix)||0)-(parseFloat(a.prix)||0));
+  });
+  let html=`<div class="recap-sheet">`;
+  html+=`<div class="recap-title">Valuation Sheet — FoS</div>`;
+  html+=`<div class="recap-subtitle">Récapitulatif des objets en vente · ${items.length} objets répertoriés</div>`;
+  vendorOrder.forEach(v=>{
+    const arr=groups[v];
+    if(!arr||!arr.length)return;
+    const specTxt=v==='TOUS'?'Prix identique chez tous les vendeurs':(specs[v]||'');
+    const label=v==='TOUS'?'TOUS LES VENDEURS':v;
+    html+=`<div class="recap-group">`;
+    html+=`<div class="recap-group-header"><span class="recap-group-name">${label}</span>`;
+    if(specTxt)html+=`<span class="recap-group-spec">${specTxt}</span>`;
+    html+=`<span class="recap-group-count">${arr.length} objet${arr.length>1?'s':''}</span></div>`;
+    html+=`<div class="recap-grid">`;
+    arr.forEach(it=>{
+      const prix=it.prix?formatPriceShort(it.prix):'—';
+      html+=`<div class="recap-item" onclick="openLightbox('${(it.img||'').replace(/'/g,"\\'")}')">`;
+      html+=`<div class="recap-item-price">${prix}</div>`;
+      html+=`<div class="recap-item-img">${it.img?`<img src="${it.img}"/>`:`<span class="recap-item-ph">IMG</span>`}</div>`;
+      html+=`<div class="recap-item-name">${it.nom}</div>`;
+      html+=`</div>`;
+    });
+    html+=`</div></div>`;
+  });
+  html+=`<div class="recap-footer">FoS — Forces Spéciales · Gray Zone Warfare</div>`;
+  html+=`</div>`;
+  rv.innerHTML=html;
+}
 function setSortField(field){if(sortField===field)sortDir*=-1;else{sortField=field;sortDir=1;}document.getElementById('sortPrix').classList.toggle('active',sortField==='prix');document.getElementById('sortNom').classList.toggle('active',sortField==='nom');const a=sortDir===1?'↑':'↓';document.getElementById('sortPrix').textContent='Prix '+a;document.getElementById('sortNom').textContent='Nom '+a;renderList();}
 function openModal(editId=null){pendingImg=null;pendingEdit=editId;const e=editId?items.find(i=>i.id===editId):null;document.getElementById('mNom').value=e?e.nom:'';document.getElementById('mPrix').value=e?e.prix:'';document.getElementById('mNom').style.borderColor='';const m=document.getElementById('mVendeur');if(e){for(let o of m.options)if(o.value===e.vendeur){o.selected=true;break;}}else m.selectedIndex=0;if(e&&e.img){pendingImg=e.img;document.getElementById('imgPreview').innerHTML=`<img src="${e.img}"/>`;}else document.getElementById('imgPreview').innerHTML='<div style="text-align:center"><div class="img-hint">Cliquer pour importer</div></div>';document.getElementById('imgFile').value='';document.getElementById('allNote').style.display='none';document.getElementById('modal-title-text').textContent=editId?'Modifier l\'objet':'Ajouter un objet';document.getElementById('modalBg').classList.add('open');}
 function editItem(id){openModal(id);}
