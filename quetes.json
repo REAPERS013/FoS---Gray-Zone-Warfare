@@ -1,5 +1,5 @@
 {
-  "version": "2026-04-11 19:20",
+  "version": "2026-04-28 22:30",
   "quetes": [
     {
       "id": "1775157632374_a298ft1e32",
@@ -200,22 +200,22 @@
           "desc": "",
           "imgs": [
             {
-              "src": "images/step_4.jpg",
+              "src": "images/step_24.jpg",
               "coords": "171/167",
               "desc": "Partir a droite du bureau"
             },
             {
-              "src": "images/step_10.jpg",
+              "src": "images/step_25.jpg",
               "coords": "171/167",
               "desc": "Prendre la 1er chambre à droite après les doubles portes"
             },
             {
-              "src": "images/step_19.jpg",
+              "src": "images/step_26.jpg",
               "coords": "171/167",
               "desc": "Sur la table prendre la note"
             },
             {
-              "src": "images/step_28.jpg",
+              "src": "images/step_27.jpg",
               "coords": "171/167",
               "desc": "la note"
             }
@@ -226,7 +226,7 @@
           "desc": "",
           "imgs": [
             {
-              "src": "images/step_32.jpg",
+              "src": "images/step_28.jpg",
               "coords": "",
               "desc": ""
             }
@@ -242,29 +242,29 @@
       "zone": "Scierie",
       "desc": "Inspectez le site du crash de l'avion ZN209",
       "reward": "500 Rép / 600 XP / 2 820 $ / 2 items",
-      "cover": "images/cover_34.jpg",
+      "cover": "images/cover_29.jpg",
       "etapes": [
         {
           "titre": "Trouver les 4 informations sur le site ",
           "desc": "",
           "imgs": [
             {
-              "src": "images/step_36.jpg",
+              "src": "images/step_30.jpg",
               "coords": "133/148",
               "desc": "Note d'un pilleur à l'arrière du 4x4 gris"
             },
             {
-              "src": "images/step_38.jpg",
+              "src": "images/step_4.jpg",
               "coords": "133/148",
               "desc": "Trappe à l'arrière de l'avion"
             },
             {
-              "src": "images/step_40.jpg",
+              "src": "images/step_9.jpg",
               "coords": "133/148",
               "desc": "Cadavre à gauche de l'avion "
             },
             {
-              "src": "images/step_42.jpg",
+              "src": "images/step_35.jpg",
               "coords": "133/148",
               "desc": "Valise à droite de l'avion"
             }
@@ -275,27 +275,27 @@
           "desc": "",
           "imgs": [
             {
-              "src": "images/step_44.jpg",
+              "src": "images/step_37.jpg",
               "coords": "135/147",
               "desc": ""
             },
             {
-              "src": "images/step_46.jpg",
+              "src": "images/step_39.jpg",
               "coords": "135/147",
               "desc": "Trouver le code du conteneur sur le 4x4 rouge"
             },
             {
-              "src": "images/step_48.jpg",
+              "src": "images/step_41.jpg",
               "coords": "135/147",
               "desc": "Activer le générateur"
             },
             {
-              "src": "images/step_50.jpg",
+              "src": "images/step_43.jpg",
               "coords": "135/147",
               "desc": "Déverrouiller la porte à l'aide du code"
             },
             {
-              "src": "images/step_52.jpg",
+              "src": "images/step_8.jpg",
               "coords": "135/147",
               "desc": "Utiliser le PC"
             }
@@ -306,22 +306,22 @@
           "desc": "",
           "imgs": [
             {
-              "src": "images/step_54.jpg",
+              "src": "images/step_17.jpg",
               "coords": "139/144",
               "desc": "Trouver la note dans le bureaux qui donne le code du cadenas"
             },
             {
-              "src": "images/step_56.jpg",
+              "src": "images/step_26.jpg",
               "coords": "139/144",
               "desc": "Lire la note (6682)"
             },
             {
-              "src": "images/step_58.jpg",
+              "src": "images/step_39.jpg",
               "coords": "137/144",
               "desc": "Déverrouiller la porte dans le cabanon au nord"
             },
             {
-              "src": "images/step_60.jpg",
+              "src": "images/step_47.jpg",
               "coords": "137/144",
               "desc": "Lire la note et rendre la quete"
             }
@@ -337,19 +337,19 @@
       "zone": "Hunter's Paradise",
       "desc": "Découvrez ce qui est arrivé sur la route menant au Hunter's Paradis",
       "reward": "500 repu (gunny) + 600 exp + 2820 usd + 4 items",
-      "cover": "images/cover_62.jpg",
+      "cover": "images/cover_53.jpg",
       "etapes": [
         {
           "titre": "Trouver la boite sur la route",
           "desc": "Dirigez-vous sur la route pour trouver la caisse verte dans le camion ",
           "imgs": [
             {
-              "src": "images/step_64.jpg",
+              "src": "images/step_56.jpg",
               "coords": "159-166",
               "desc": "Caisse verte à l'arrière du camion"
             },
             {
-              "src": "images/step_66.jpg",
+              "src": "images/step_59.jpg",
               "coords": "159-166",
               "desc": "Sur la route derrière le camion pour ce diriger a Hunter's Paradis"
             }
@@ -360,17 +360,17 @@
           "desc": "Première place a vous déplacer est la décharge\n\nDeuxième place a vous déplacer est au motel\n\nTroisième place a vous déplacer est au point de repos",
           "imgs": [
             {
-              "src": "images/step_68.jpg",
+              "src": "images/step_62.jpg",
               "coords": "159-167",
               "desc": "vous devez simplement vous rendre a l'endroit"
             },
             {
-              "src": "images/step_70.jpg",
+              "src": "images/step_65.jpg",
               "coords": "160-167",
               "desc": "vous devez simplement vous rendre a l'endroit"
             },
             {
-              "src": "images/step_72.jpg",
+              "src": "images/step_68.jpg",
               "coords": "161-168",
               "desc": "vous devez simplement vous rendre a l'endroit"
             }
@@ -381,22 +381,22 @@
           "desc": "Déplacez-vous dans l'entrepôt pour trouver la porte de la réserve d'armes et ouvrir avec la clé trouve sur un PNJ",
           "imgs": [
             {
-              "src": "images/step_74.jpg",
+              "src": "images/step_73.jpg",
               "coords": "",
               "desc": "clé de réserve d'armes"
             },
             {
-              "src": "images/step_76.jpg",
+              "src": "images/step_74.jpg",
               "coords": "159-168",
               "desc": "porte de la réserve d'armes"
             },
             {
-              "src": "images/step_79.jpg",
+              "src": "images/step_77.jpg",
               "coords": "159-168",
               "desc": " l'armurerie de Hunter's Paradis"
             },
             {
-              "src": "images/step_81.jpg",
+              "src": "images/step_80.jpg",
               "coords": "159-168",
               "desc": "la caisse est a droite de la porte"
             }
@@ -407,22 +407,22 @@
           "desc": "vous devez chercher deux (2) document \n\n-Premier document est au motel sur une table de pinique\n\n-Deuxième document est au poste de contrôle",
           "imgs": [
             {
-              "src": "images/step_83.jpg",
+              "src": "images/step_85.jpg",
               "coords": "161-167",
               "desc": "document sur la table de pinic"
             },
             {
-              "src": "images/step_85.jpg",
+              "src": "images/step_88.jpg",
               "coords": "161-167",
               "desc": "motel"
             },
             {
-              "src": "images/step_4.jpg",
+              "src": "images/step_91.jpg",
               "coords": "160-168",
               "desc": "document sur la table a droite"
             },
             {
-              "src": "images/step_11.jpg",
+              "src": "images/step_94.jpg",
               "coords": "160-168",
               "desc": "Guerrite"
             }
@@ -443,14 +443,14 @@
       "zone": "Hunter's Paradise",
       "desc": "Retrouvez Auii Syvongsa",
       "reward": "500 Rép / 600 XP / 2 820 $ / 2 items",
-      "cover": "images/cover_20.jpg",
+      "cover": "images/cover_97.jpg",
       "etapes": [
         {
           "titre": "Trouver le cadavre",
           "desc": "",
           "imgs": [
             {
-              "src": "images/step_23.jpg",
+              "src": "images/step_100.jpg",
               "coords": "159/168",
               "desc": "Trouver l'homme attaché"
             }
@@ -461,7 +461,7 @@
           "desc": "Fouiller le cadavre",
           "imgs": [
             {
-              "src": "images/step_31.jpg",
+              "src": "images/step_103.jpg",
               "coords": "159/168",
               "desc": "Prendre la lettre"
             }
@@ -472,17 +472,17 @@
           "desc": "Direction au Sud du couloirs de tir",
           "imgs": [
             {
-              "src": "images/step_38.jpg",
+              "src": "images/step_106.jpg",
               "coords": "159/168",
               "desc": "Aller au restaurant "
             },
             {
-              "src": "images/step_46.jpg",
+              "src": "images/step_108.jpg",
               "coords": "159/168",
               "desc": "Aller au fond de la cuisine"
             },
             {
-              "src": "images/step_51.jpg",
+              "src": "images/step_111.jpg",
               "coords": "159/168",
               "desc": "Prendre les échantillons"
             }
@@ -493,12 +493,12 @@
           "desc": "Direction à l'Est du couloir de tir",
           "imgs": [
             {
-              "src": "images/step_57.jpg",
+              "src": "images/step_114.jpg",
               "coords": "160/168",
               "desc": "Aller dans la maison"
             },
             {
-              "src": "images/step_63.jpg",
+              "src": "images/step_117.jpg",
               "coords": "160/168",
               "desc": "Lire le programme dans la salle de repos"
             }
@@ -509,32 +509,32 @@
           "desc": "Trouver le code du bunker et l'ouvrir",
           "imgs": [
             {
-              "src": "images/step_76.jpg",
+              "src": "images/step_120.jpg",
               "coords": "159/168",
               "desc": "Aller dans la pièce du boucher proche du 1er cadavre"
             },
             {
-              "src": "images/step_90.jpg",
+              "src": "images/step_123.jpg",
               "coords": "159/168",
               "desc": "Lire le post-it vert sur le mur proche du bureau"
             },
             {
-              "src": "images/step_92.jpg",
+              "src": "images/step_126.jpg",
               "coords": "",
               "desc": "Code (propable dynamique) : 9076"
             },
             {
-              "src": "images/step_96.jpg",
+              "src": "images/step_129.jpg",
               "coords": "158/169",
               "desc": "Direction le Bunker une fois le code récupérer"
             },
             {
-              "src": "images/step_99.jpg",
+              "src": "images/step_132.jpg",
               "coords": "158/169",
               "desc": "Trouver le bunker dans la forêt "
             },
             {
-              "src": "images/step_102.jpg",
+              "src": "images/step_135.jpg",
               "coords": "158/170",
               "desc": "Aller dans les toilettes au fond a droite du bunker"
             }
@@ -545,7 +545,7 @@
           "desc": "",
           "imgs": [
             {
-              "src": "images/step_104.jpg",
+              "src": "images/step_138.jpg",
               "coords": "",
               "desc": "Rendre la lettre et les échantillons"
             }
@@ -561,19 +561,19 @@
       "zone": "Midnight Sapphire",
       "desc": "Trouver le magazine dans Mignight Sapphire et livrez le",
       "reward": "Débloquage Arme",
-      "cover": "images/cover_107.jpg",
+      "cover": "images/cover_141.jpg",
       "etapes": [
         {
           "titre": "Trouver le livre",
           "desc": "",
           "imgs": [
             {
-              "src": "images/step_109.jpg",
+              "src": "images/step_144.jpg",
               "coords": "171/166",
               "desc": "Aller a gauche de l'entrée de l'hôtel"
             },
             {
-              "src": "images/step_112.jpg",
+              "src": "images/step_147.jpg",
               "coords": "171/166",
               "desc": "Prendre le magazine sur la table"
             }
@@ -589,19 +589,19 @@
       "zone": "Midnight Sapphire",
       "desc": "Trouver le magazine sur le toi de l'hôtel de Mignight Sapphire",
       "reward": "Débloquage Arme",
-      "cover": "images/cover_115.jpg",
+      "cover": "images/cover_150.jpg",
       "etapes": [
         {
           "titre": "Aller au dernier étage de l'hôtel",
           "desc": "Face NE aller sur le coter droit ",
           "imgs": [
             {
-              "src": "images/step_118.jpg",
+              "src": "images/step_153.jpg",
               "coords": "171/166",
               "desc": "Le magazine se trouve sur le toit de l'hotel"
             },
             {
-              "src": "images/step_121.jpg",
+              "src": "images/step_156.jpg",
               "coords": "171/166",
               "desc": "Prendre le magazine et le rendre"
             }
@@ -617,19 +617,19 @@
       "zone": "Midnight Sapphire",
       "desc": "Trouvez les cigares cubains et les lingots d'or",
       "reward": "Rép / XP / $",
-      "cover": "images/cover_125.jpg",
+      "cover": "images/cover_158.jpg",
       "etapes": [
         {
           "titre": "Trouver les cigares",
           "desc": "Villa Marta Monica",
           "imgs": [
             {
-              "src": "images/step_128.jpg",
+              "src": "images/step_161.jpg",
               "coords": "172/165",
               "desc": "Aller à l'annexe"
             },
             {
-              "src": "images/step_131.jpg",
+              "src": "images/step_164.jpg",
               "coords": "172/165",
               "desc": "Prendre les cigares"
             }
@@ -640,22 +640,22 @@
           "desc": "Villa Anna Jana",
           "imgs": [
             {
-              "src": "images/step_133.jpg",
+              "src": "images/step_167.jpg",
               "coords": "172/165",
               "desc": "Trouver le code du coffre"
             },
             {
-              "src": "images/step_137.jpg",
+              "src": "images/step_170.jpg",
               "coords": "172/165",
               "desc": "Prendre le post-it bleu"
             },
             {
-              "src": "images/step_140.jpg",
+              "src": "images/step_173.jpg",
               "coords": "172/165",
               "desc": "Lire le message depuis l'inventaire"
             },
             {
-              "src": "images/step_142.jpg",
+              "src": "images/step_176.jpg",
               "coords": "172/165",
               "desc": "Déverrouiller le coffre dans la chambre"
             }
@@ -666,7 +666,7 @@
           "desc": "",
           "imgs": [
             {
-              "src": "images/step_145.jpg",
+              "src": "images/step_181.jpg",
               "coords": "",
               "desc": ""
             }
@@ -682,19 +682,19 @@
       "zone": "Scierie",
       "desc": "Quest a plusieurs étape",
       "reward": "500 repu (handshake) + 500 exp + 650 usd + 1 items",
-      "cover": "images/cover_148.jpg",
+      "cover": "images/cover_184.jpg",
       "etapes": [
         {
           "titre": "Ce rendre a la crète",
           "desc": "Déplacez-vous sous la tente verte",
           "imgs": [
             {
-              "src": "images/step_152.jpg",
+              "src": "images/step_187.jpg",
               "coords": "138-143",
               "desc": "La tente verte vous devez simplement vous déplacer a l'intérieur"
             },
             {
-              "src": "images/step_154.jpg",
+              "src": "images/step_190.jpg",
               "coords": "138-143",
               "desc": ""
             }
@@ -705,57 +705,57 @@
           "desc": "Première étape : Trouver le code de la porte\n\nDeuxième étape : trouver trois (3) emplacement/objets:\n-premier au bureaux\n-deuxième a la scie\n-troisième dans l'entrepôt",
           "imgs": [
             {
-              "src": "images/step_157.jpg",
+              "src": "images/step_193.jpg",
               "coords": "139-144",
               "desc": "Le document est sur la table blanche, code a l'intérieur"
             },
             {
-              "src": "images/step_160.jpg",
+              "src": "images/step_196.jpg",
               "coords": "139-144",
               "desc": ""
             },
             {
-              "src": "images/step_163.jpg",
+              "src": "images/step_198.jpg",
               "coords": "139-143",
               "desc": "La porte a débarrer"
             },
             {
-              "src": "images/step_166.jpg",
+              "src": "images/step_201.jpg",
               "coords": "139-143",
               "desc": ""
             },
             {
-              "src": "images/step_169.jpg",
+              "src": "images/step_204.jpg",
               "coords": "139-143",
               "desc": "Premier document sur le lavabos"
             },
             {
-              "src": "images/step_172.jpg",
+              "src": "images/step_208.jpg",
               "coords": "139-144",
               "desc": "Le tableau a vérifier seulement appuyer sur F "
             },
             {
-              "src": "images/step_175.jpg",
+              "src": "images/step_211.jpg",
               "coords": "139-144",
               "desc": ""
             },
             {
-              "src": "images/step_178.jpg",
+              "src": "images/step_214.jpg",
               "coords": "139-144",
               "desc": "Lit d'hôpital a vérifier seulement appuyer sur F "
             },
             {
-              "src": "images/step_181.jpg",
+              "src": "images/step_217.jpg",
               "coords": "139-144",
               "desc": ""
             },
             {
-              "src": "images/step_184.jpg",
+              "src": "images/step_220.jpg",
               "coords": "139-143",
               "desc": "Document gris sur le bureau a vérifier seulement appuyer sur F "
             },
             {
-              "src": "images/step_187.jpg",
+              "src": "images/step_223.jpg",
               "coords": "139-143",
               "desc": ""
             }
@@ -766,17 +766,17 @@
           "desc": "Dirigez-vous a la cabane de pêche pour vérifier un cadavre",
           "imgs": [
             {
-              "src": "images/step_190.jpg",
+              "src": "images/step_225.jpg",
               "coords": "141-145",
               "desc": "Cabane de pêche"
             },
             {
-              "src": "images/step_193.jpg",
+              "src": "images/step_228.jpg",
               "coords": "141-145",
               "desc": "corps a vérifier seulement appuyer sur F"
             },
             {
-              "src": "images/step_196.jpg",
+              "src": "images/step_230.jpg",
               "coords": "141-145",
               "desc": ""
             }
@@ -792,19 +792,19 @@
       "zone": "Midnight Sapphire",
       "desc": "Trouver un club de golf en or",
       "reward": "306 rep + 600 exp + 1880 usd",
-      "cover": "images/cover_199.jpg",
+      "cover": "images/cover_233.jpg",
       "etapes": [
         {
           "titre": "Aller sur les Lieux",
           "desc": "Dirigez-vous au petit shack dans le terrain de golf a Might Saphir",
           "imgs": [
             {
-              "src": "images/step_202.jpg",
+              "src": "images/step_237.jpg",
               "coords": "168-169",
               "desc": ""
             },
             {
-              "src": "images/step_205.jpg",
+              "src": "images/step_240.jpg",
               "coords": "168-169",
               "desc": "petit shack a trois (3) porte"
             }
@@ -815,12 +815,12 @@
           "desc": "Dirigez-vous soi a la première porte ou la dernière port deux spawn possible",
           "imgs": [
             {
-              "src": "images/step_208.jpg",
+              "src": "images/step_243.jpg",
               "coords": "168-169",
               "desc": "premier spawn"
             },
             {
-              "src": "images/step_211.jpg",
+              "src": "images/step_246.jpg",
               "coords": "168-169",
               "desc": "Deuxième spawn"
             }
@@ -841,19 +841,19 @@
       "zone": "Tiger Bay",
       "desc": "Récupérez le kit d'analyse et faites votre rapport à Lab Rat",
       "reward": "Rép / XP / $ / items",
-      "cover": "images/cover_214.jpg",
+      "cover": "images/cover_249.jpg",
       "etapes": [
         {
           "titre": "Direction l'avant poste à l'Ouest",
           "desc": "",
           "imgs": [
             {
-              "src": "images/step_217.jpg",
+              "src": "images/step_252.jpg",
               "coords": "192/128",
               "desc": "Rentrer dans le conteneur"
             },
             {
-              "src": "images/step_221.jpg",
+              "src": "images/step_254.jpg",
               "coords": "192/128",
               "desc": "Prendre le kit"
             }
@@ -864,12 +864,12 @@
           "desc": "Direction le camp de réfugiés de l'UNLRA à l'EST",
           "imgs": [
             {
-              "src": "images/step_224.jpg",
+              "src": "images/step_257.jpg",
               "coords": "200/130",
               "desc": "Aller dans la tente de droite"
             },
             {
-              "src": "images/step_227.jpg",
+              "src": "images/step_260.jpg",
               "coords": "200/130",
               "desc": "Prendre le document à coter du pc"
             }
@@ -880,12 +880,12 @@
           "desc": "Clé nécessaire TB UNQuar, se trouve sur les cadavres",
           "imgs": [
             {
-              "src": "images/step_230.jpg",
+              "src": "images/step_263.jpg",
               "coords": "200/130",
               "desc": "Direction le conteneur après la tente"
             },
             {
-              "src": "images/step_233.jpg",
+              "src": "images/step_266.jpg",
               "coords": "200/130",
               "desc": "Trouver le corp sur le lit"
             }
@@ -896,7 +896,7 @@
           "desc": "",
           "imgs": [
             {
-              "src": "images/step_236.jpg",
+              "src": "images/step_269.jpg",
               "coords": "200/130",
               "desc": "Prendre l'échantillons juste à coter du cadavre"
             }
@@ -907,17 +907,17 @@
           "desc": "Bâtiment en EST, clé nécessaire TB LabUN",
           "imgs": [
             {
-              "src": "images/step_239.jpg",
+              "src": "images/step_272.jpg",
               "coords": "201/132",
               "desc": "Prendre la porte de droite"
             },
             {
-              "src": "images/step_242.jpg",
+              "src": "images/step_275.jpg",
               "coords": "201/132",
               "desc": "Aller dans le réfrigirateur"
             },
             {
-              "src": "images/step_245.jpg",
+              "src": "images/step_278.jpg",
               "coords": "201/132",
               "desc": "Prendre l'échantillons "
             }
@@ -928,7 +928,7 @@
           "desc": "",
           "imgs": [
             {
-              "src": "images/step_248.jpg",
+              "src": "images/step_281.jpg",
               "coords": "",
               "desc": ""
             }
@@ -944,19 +944,19 @@
       "zone": "Tiger Bay",
       "desc": "Dans le batiment municipal\nRécupérer les documents au bureau du vice-président et dans les archives",
       "reward": "300 RP / 600 XP / 1880 $",
-      "cover": "images/cover_256.jpg",
+      "cover": "images/cover_284.jpg",
       "etapes": [
         {
           "titre": "Récupérer le document au bureau du vice-président (salle annexe)",
           "desc": "allé dans la salle annexe derrière à droite",
           "imgs": [
             {
-              "src": "images/step_257.jpg",
+              "src": "images/step_287.jpg",
               "coords": "199/129",
               "desc": "bureau"
             },
             {
-              "src": "images/step_258.jpg",
+              "src": "images/step_290.jpg",
               "coords": "",
               "desc": "salle annexe"
             }
@@ -967,7 +967,7 @@
           "desc": "Récuperer le code pour la salle des archives (post-it vert) dans la salle à gauche du bureau",
           "imgs": [
             {
-              "src": "images/step_259.jpg",
+              "src": "images/step_293.jpg",
               "coords": "",
               "desc": ""
             }
@@ -978,12 +978,61 @@
           "desc": "ATTENTION ne pas mettre le doc dans la caisse sécurisé de votre inventaire (la quête ne se valide pas sinon)",
           "imgs": [
             {
-              "src": "images/step_260.jpg",
+              "src": "images/step_296.jpg",
               "coords": "",
               "desc": ""
             },
             {
-              "src": "images/step_261.jpg",
+              "src": "images/step_299.jpg",
+              "coords": "",
+              "desc": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1777415432393_ugfitiuinjf",
+      "nom": "C'est qui le Boss - Glock17 KAPTEI",
+      "type": "deblocage",
+      "vendeur": "GUNNY",
+      "zone": "Scierie",
+      "desc": "Une fois que vous ou un membre de votre team avez tué le BOSS de la Scierie(SAWMILL) cette quete ce debloque",
+      "reward": "120 rep Gunn - 150 Exp - 370$ - Arme",
+      "cover": "images/cover_302.jpg",
+      "etapes": [
+        {
+          "titre": "Tuer le Boss ",
+          "desc": "il faut que vous ou un membre de votre SQUAD bute ce salopard de KAPTEI ",
+          "imgs": []
+        },
+        {
+          "titre": "Allez au dépôt de riz ",
+          "desc": "Il se trouve a l'ouest de SAVANNAH ",
+          "imgs": [
+            {
+              "src": "images/step_303.jpg",
+              "coords": "",
+              "desc": ""
+            },
+            {
+              "src": "images/step_304.jpg",
+              "coords": "132-136",
+              "desc": "post it sur la table maison de gauche "
+            }
+          ]
+        },
+        {
+          "titre": "Allez au Camp LLA ",
+          "desc": "Il va falloir vous rendre dans le camp de tranchée des LLA au sud de MYSTIC et recuperer un ordi portable sur la table au milieu du camp une fois que c'est fait il faut ramener l'ordi a Gunny en se rendant a la base ou dans un Avant Poste",
+          "imgs": [
+            {
+              "src": "images/step_305.jpg",
+              "coords": "130-150",
+              "desc": ""
+            },
+            {
+              "src": "images/step_306.jpg",
               "coords": "",
               "desc": ""
             }
